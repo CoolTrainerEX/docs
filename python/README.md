@@ -67,7 +67,7 @@ sys.path.insert(0, str(Path("..").resolve()))
 
 ### Run
 
-VS Code Debugger, or
+VS Code Debugger, or:
 
 ```ps
 uv run .\main.py
