@@ -6,5 +6,6 @@ Gin is a web framework for servers.
 
 ### Initialization
 
-```sh
-```
+#### Dependencies
+
+[Dependencies](deps.json)
