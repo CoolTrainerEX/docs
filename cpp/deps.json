@@ -1,0 +1,8 @@
+{
+    "deps": [
+        "gtest"
+    ],
+    "dev": [
+        "doxygen"
+    ]
+}

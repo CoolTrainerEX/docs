@@ -10,21 +10,23 @@ Install [`uv`](https://docs.astral.sh/uv/).
 
 ### Initialization
 
-```ps
+```sh
 uv init <name>
 cd <name>
 ```
 
-#### Install Dependencies
+#### Dependencies
 
-```ps
-uv add <pkg1> <pkg2>
-uv add <pkg3> <pkg4> --dev # Dev dependencies
+```sh
+uv add <dep1> <dep2>
+uv add <dep3> <dep4> --dev # dev dependencies
 ```
 
 [Dependencies](deps.json)
 
-```ps
+#### continued
+
+```sh
 sphinx-quickstart docs --ext-autodoc # Follow pyproject.toml version, author, etc
 ```
 
@@ -41,7 +43,7 @@ convention = "google"
 #### `.gitignore`
 
 ```gitignore
-docs/_*/
+/docs/_*/
 ```
 
 #### `docs/conf.py`
@@ -69,13 +71,13 @@ sys.path.insert(0, str(Path("..").resolve()))
 
 VS Code Debugger, or:
 
-```ps
+```sh
 uv run .\main.py
 ```
 
-### Docs
+## Docs
 
-```ps
+```sh
 sphinx-apidoc -o docs .
 .\docs\make.bat html
 ```
@@ -86,7 +88,7 @@ Do not need to run `make` if using [Read the Docs](https://app.readthedocs.org/d
 
 After upgrading, run:
 
-```ps
+```sh
 uv tool upgrade --all
 uv cache prune
 ```

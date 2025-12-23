@@ -4,7 +4,7 @@ Rust is used for low-level programming and CLI apps.
 
 ## Installation
 
-Install [`rustup`](https://rust-lang.github.io/rustup/) and select the toolchain for C compiler (`gcc` or `msvc`).
+Install [`rustup`](https://rust-lang.github.io/rustup/) and select the toolchain for [C](../cpp/README.md) compiler (`gcc` or `msvc`).
 
 [Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)
 
@@ -12,33 +12,33 @@ Install [`rustup`](https://rust-lang.github.io/rustup/) and select the toolchain
 
 ### Initialization
 
-```ps
+```sh
 cargo new <name>
 cd <name>
 ```
 
-#### Install Dependencies
+#### Dependencies
 
-```ps
-cargo add <pkg1> <pkg2>
-cargo add <pkg3> <pkg4> --dev # Dev dependencies
+```sh
+cargo add <dep1> <dep2>
+cargo add <dep3> <dep4> --dev # dev dependencies
 ```
 
 ### Run
 
-```ps
+```sh
 cargo run
 ```
 
 ### Build
 
-```ps
+```sh
 cargo build
 ```
 
-### Docs
+## Docs
 
-```ps
+```sh
 cargo doc
 ```
 
