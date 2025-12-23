@@ -67,6 +67,8 @@ sys.path.insert(0, str(Path("..").resolve()))
    modules
 ```
 
+Add `modules` line
+
 ### Run
 
 VS Code Debugger, or:
