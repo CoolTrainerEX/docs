@@ -81,3 +81,12 @@ sphinx-apidoc -o docs .
 ```
 
 Do not need to run `make` if using [Read the Docs](https://app.readthedocs.org/dashboard/)
+
+## Upgrading
+
+After upgrading, run:
+
+```ps
+uv tool upgrade --all
+uv cache prune
+```
