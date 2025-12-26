@@ -9,3 +9,9 @@ Gin is a web framework for servers.
 #### Dependencies
 
 [Dependencies](deps.json)
+
+#### continued
+
+```sh
+go tool cobra-cli init -a <username> -l <license> --viper
+```

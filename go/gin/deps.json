@@ -1,7 +1,15 @@
 {
     "deps": [
+        "github.com/spf13/cobra",
         "github.com/gin-gonic/gin",
         "gorm.io/gorm",
-        "gorm.io/driver/postgres"
+        "github.com/golang-jwt/jwt/v5",
+        "gorm.io/driver/postgres",
+        "github.com/stretchr/testify",
+        "github.com/spf13/viper",
+        "go.uber.org/zap"
+    ],
+    "dev": [
+        "github.com/spf13/cobra-cli"
     ]
 }
