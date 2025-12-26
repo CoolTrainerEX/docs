@@ -1,0 +1,15 @@
+{
+    "deps": [
+        "anyhow",
+        "clap --features derive",
+        "colored",
+        "console",
+        "dialoguer",
+        "indicatif",
+        "serde --features derive",
+        "serde_json"
+    ],
+    "dev": [
+        "assert_cmd"
+    ]
+}

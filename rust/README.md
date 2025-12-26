@@ -24,6 +24,8 @@ cargo add <dep1> <dep2>
 cargo add <dep3> <dep4> --dev # dev dependencies
 ```
 
+[Dependencies](deps.json)
+
 ### Run
 
 ```sh
