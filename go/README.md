@@ -29,6 +29,17 @@ go get -tool <dep4>
 
 [Dependencies](deps.json)
 
+#### compose.yaml
+
+Uncomment Postgres image, then:
+
+```yaml
+services:
+  db:
+    volumes:
+      - db-data:/var/lib/postgresql # Remove /data
+```
+
 ### Run
 
 VS Code Debugger, or:
