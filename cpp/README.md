@@ -4,7 +4,7 @@ C++ is used for low-level programming as an alternative to [Rust](../rust/README
 
 ## Installation
 
-Install [`mingw`](https://www.mingw-w64.org/) and [Conan](https://conan.io/). [Python](../python/README.md) is needed to install Conan.
+Install [`mingw`](https://www.mingw-w64.org/) (or [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2026)) and [Conan](https://conan.io/). [Python](../python/README.md) is needed to install Conan.
 
 ```sh
 uv tool install conan
@@ -118,3 +118,11 @@ doxygen
 - \<exe1>
 - \<exe2>
 - ...
+
+## Upgrading
+
+After upgrading, run:
+
+```sh
+conan cache clean
+```

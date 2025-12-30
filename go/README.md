@@ -15,7 +15,7 @@ Install [Go](https://go.dev/).
 ```sh1
 mkdir <name>
 cd <name>
-go mod init github.com/<name>
+go mod init github.com/<username>/<name>
 docker init
 ```
 

@@ -10,6 +10,8 @@
         "go.uber.org/zap"
     ],
     "dev": [
-        "github.com/spf13/cobra-cli"
+        "github.com/spf13/cobra-cli",
+        "gorm.io/cli/gorm",
+        "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen"
     ]
 }
