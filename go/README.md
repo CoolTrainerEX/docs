@@ -102,3 +102,11 @@ go tool doc2go -out docs ./...
   - \<lib4>
     - \<lib4>.go
     - \<lib4>_test.go
+
+## Upgrading
+
+After upgrading, run:
+
+```sh
+ go clean -cache -testcache -modcache -fuzzcache
+```
