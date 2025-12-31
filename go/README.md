@@ -45,7 +45,7 @@ services:
 VS Code Debugger, or:
 
 ```sh
-go run .\main.go
+go run ./main.go
 ```
 
 #### Docker

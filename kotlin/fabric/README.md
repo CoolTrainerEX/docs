@@ -18,7 +18,30 @@ Use Kotlin. Package name is `com.<username>`.
 
 Run `vscode` and `genSources` Gradle task using VS Code Gradle Extension, or:
 
-```sh1
-.\gradlew vscode
-.\gradlew genSources
+```sh
+./gradlew vscode
+./gradlew genSources
+```
+
+### Run
+
+VS Code Debugger, or:
+
+```sh
+./gradlew runClient # or
+./gradlew runServer
+```
+
+### Build
+
+GitHub Actions, or:
+
+```sh
+./gradlew build
+```
+
+### Upgrading
+
+```sh
+fabric upgrade
 ```

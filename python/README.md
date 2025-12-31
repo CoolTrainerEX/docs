@@ -74,14 +74,14 @@ Add `modules` line
 VS Code Debugger, or:
 
 ```sh
-uv run .\main.py
+uv run ./main.py
 ```
 
 ## Docs
 
 ```sh
 sphinx-apidoc -o docs .
-.\docs\make.bat html
+./docs/make.bat html
 ```
 
 Do not need to run `make` if using [Read the Docs](https://app.readthedocs.org/dashboard/)

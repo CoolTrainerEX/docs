@@ -32,6 +32,7 @@ package: api
 generate:
   gin-server: true
   models: true
+  strict-server: true
 output: gen.go
 ```
 

@@ -7,7 +7,8 @@ Tauri is used to make GUI apps.
 ### Installation
 
 ```sh
-deno run -A npm:create-tauri-app
+deno run -A npm:create-tauri-app <name>
+cd <name>
 ```
 
 ### Run
