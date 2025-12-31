@@ -42,7 +42,7 @@ services:
 
 ### Run
 
-VS Code Debugger, or:
+**VS Code** Debugger, or:
 
 ```sh
 go run ./main.go

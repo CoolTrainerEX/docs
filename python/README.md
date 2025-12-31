@@ -71,7 +71,7 @@ Add `modules` line
 
 ### Run
 
-VS Code Debugger, or:
+**VS Code** Debugger, or:
 
 ```sh
 uv run ./main.py

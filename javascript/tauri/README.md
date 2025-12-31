@@ -19,7 +19,7 @@ deno task tauri dev
 
 ### Build
 
-GitHub Actions, or:
+**GitHub Actions**, or:
 
 ```sh
 deno task tauri build

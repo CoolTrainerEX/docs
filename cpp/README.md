@@ -76,11 +76,11 @@ HTML_OUTPUT            = .
 
 ### Run
 
-VS Code Debugger
+**VS Code** Debugger
 
 ### Build
 
-VS Code CMake Build
+**VS Code** CMake Build
 
 ## Docs
 

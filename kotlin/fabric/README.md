@@ -16,7 +16,7 @@ fabric init <name>
 
 Use Kotlin. Package name is `com.<username>`.
 
-Run `vscode` and `genSources` Gradle task using VS Code Gradle Extension, or:
+Run `vscode` and `genSources` Gradle task using [**VS Code Gradle for Java Extension**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle), or:
 
 ```sh
 ./gradlew vscode
@@ -25,7 +25,7 @@ Run `vscode` and `genSources` Gradle task using VS Code Gradle Extension, or:
 
 ### Run
 
-VS Code Debugger, or:
+**VS Code** Debugger, or:
 
 ```sh
 ./gradlew runClient # or
@@ -34,7 +34,7 @@ VS Code Debugger, or:
 
 ### Build
 
-GitHub Actions, or:
+**GitHub Actions**, or:
 
 ```sh
 ./gradlew build
