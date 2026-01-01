@@ -2,6 +2,7 @@
     "deps": [
         "github.com/spf13/cobra",
         "github.com/gin-gonic/gin",
+        "github.com/oapi-codegen/gin-middleware",
         "gorm.io/gorm",
         "github.com/golang-jwt/jwt/v5",
         "gorm.io/driver/postgres",
