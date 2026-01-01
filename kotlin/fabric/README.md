@@ -6,6 +6,10 @@ Fabric is used for Minecraft mod development.
 
 Install [Deno](../../javascript/README.md) for the [Fabric CLI](https://fabricmc.net/develop/cli/).
 
+```sh
+deno install -A -g -n fabric https://fabricmc.net/cli
+```
+
 ## Usage
 
 ### Initialization

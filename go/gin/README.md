@@ -2,6 +2,14 @@
 
 Gin is a web framework for servers.
 
+## Installation
+
+Install [Deno](../../javascript//README.md) for [Redocly CLI](https://redocly.com/docs/cli)
+
+```sh
+deno install -A -g npm:@redocly/cli
+```
+
 ## Usage
 
 ### Initialization
@@ -42,4 +50,18 @@ output: gen.go
 package model
 
 //go:generate go tool gorm gen -i model.go
+```
+
+## Docs
+
+```sh
+redocly build-docs ./openapi.yml -o docs/index.html
+```
+
+## Upgrading
+
+After upgrading, run:
+
+```sh
+deno install -A -g -f npm:@redocly/cli
 ```
