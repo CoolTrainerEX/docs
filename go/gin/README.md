@@ -29,7 +29,7 @@ go tool cobra-cli init -a <username> -l <license> --viper
 ```go
 package api
 
-//go:generate go tool oapi-codegen -config cfg.yaml ../../api.yaml
+//go:generate go tool oapi-codegen -config ./cfg.yaml ../../openapi.yaml
 ```
 
 #### `internal/api/cfg.yaml`
@@ -49,13 +49,13 @@ output: gen.go
 ```go
 package model
 
-//go:generate go tool gorm gen -i model.go
+//go:generate go tool gorm gen -i ./model.go
 ```
 
 ## Docs
 
 ```sh
-redocly build-docs ./openapi.yml -o docs/index.html
+redocly build-docs ./openapi.yml -o ./docs/index.html
 ```
 
 ## Upgrading

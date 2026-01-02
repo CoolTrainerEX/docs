@@ -1,15 +1,21 @@
 {
     "deps": [
+        "anstream",
+        "anstyle",
         "anyhow",
         "clap --features derive",
-        "colored",
-        "console",
         "dialoguer",
+        "figment",
         "indicatif",
         "serde --features derive",
-        "serde_json"
+        "thiserror",
+        "tracing",
+        "tracing_indicatif",
+        "validator --features derive"
     ],
     "dev": [
-        "assert_cmd"
+        "assert_cmd",
+        "assert_fs",
+        "predicates"
     ]
 }

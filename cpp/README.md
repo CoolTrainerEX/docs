@@ -67,11 +67,11 @@ doxygen -g
 #### Doxyfile
 
 ```sh
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY       = ./docs
 OPTIMIZE_OUTPUT_FOR_C  = YES
 RECURSIVE              = YES
 EXCLUDE_PATTERNS       = conanfile.py
-HTML_OUTPUT            = .
+HTML_OUTPUT            = ./
 ```
 
 ### Run

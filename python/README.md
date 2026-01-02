@@ -27,7 +27,7 @@ uv add <dep3> <dep4> --dev # dev dependencies
 #### continued
 
 ```sh
-sphinx-quickstart docs --ext-autodoc # Follow pyproject.toml version, author, etc
+sphinx-quickstart ./docs --ext-autodoc # Follow pyproject.toml version, author, etc
 ```
 
 #### `pyproject.toml`
@@ -80,7 +80,7 @@ uv run ./main.py
 ## Docs
 
 ```sh
-sphinx-apidoc -o docs .
+sphinx-apidoc -o ./docs ./
 ./docs/make.bat html
 ```
 

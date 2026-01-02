@@ -12,7 +12,7 @@ Install [Go](https://go.dev/).
 
 ### Initialization
 
-```sh1
+```sh
 mkdir <name>
 cd <name>
 go mod init github.com/<username>/<name>
@@ -69,7 +69,7 @@ go build
 ## Docs
 
 ```sh
-go tool doc2go -out docs ./...
+go tool doc2go -out ./docs ./...
 ```
 
 ## Directory
