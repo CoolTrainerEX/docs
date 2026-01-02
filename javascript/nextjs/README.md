@@ -7,7 +7,7 @@ NextJS is used to make frontend websites
 ### Initialization
 
 ```sh
-deno run -A npm:create-next-app <name>
+deno x npm:create-next-app --example with-vitest <name>
 deno install --allow-scripts
 ```
 

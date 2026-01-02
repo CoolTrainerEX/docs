@@ -1,4 +1,7 @@
 {
+    "deps": [
+        "github.com/stretchr/testify"
+    ],
     "dev": [
         "go.abhg.dev/doc2go"
     ]
