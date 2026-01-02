@@ -1,6 +1,6 @@
 # Gin
 
-Gin is a web framework for servers.
+Gin is a backend web framework for servers.
 
 ## Installation
 
