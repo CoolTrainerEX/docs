@@ -17,6 +17,8 @@ deno add <dep1> <dep2>
 deno add <dep3> <dep4> -D # dev dependencies
 ```
 
+[Dependencies](deps.json)
+
 ## Docs
 
 ```sh
