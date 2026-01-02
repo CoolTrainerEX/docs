@@ -69,7 +69,7 @@ go build
 ## Docs
 
 ```sh
-go tool doc2go -out ./docs ./...
+go tool doc2go -out ./docs/ ./...
 ```
 
 ## Directory
