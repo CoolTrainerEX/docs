@@ -1,0 +1,12 @@
+{
+    "deps": [
+        "npm:lucide-react"
+    ],
+    "dev": [
+        "npm:vitest",
+        "npm:@vitejs/plugin-react jsdom",
+        "npm:@testing-library/react",
+        "npm:@testing-library/dom",
+        "npm:vite-tsconfig-paths"
+    ]
+}

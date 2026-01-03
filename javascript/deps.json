@@ -1,5 +1,5 @@
 {
     "deps": [
-        "pino"
+        "npm:pino"
     ]
 }
