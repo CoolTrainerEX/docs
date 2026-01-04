@@ -3,15 +3,30 @@
         "anstream",
         "anstyle",
         "anyhow",
-        "clap --features derive",
+        {
+            "name": "clap",
+            "features": [
+                "derive"
+            ]
+        },
         "dialoguer",
         "figment",
         "indicatif",
-        "serde --features derive",
+        {
+            "name": "serde",
+            "features": [
+                "derive"
+            ]
+        },
         "thiserror",
         "tracing",
         "tracing_indicatif",
-        "validator --features derive"
+        {
+            "name": "validator",
+            "features": [
+                "derive"
+            ]
+        }
     ],
     "dev": [
         "assert_cmd",
