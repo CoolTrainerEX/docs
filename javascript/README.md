@@ -10,11 +10,15 @@ Install [Deno](https://deno.com/). For CSS Preprocessor, install [Sass](https://
 
 ### Initialization
 
+```sh
+deno init <name>
+```
+
 #### Dependencies
 
 ```sh
-deno add <dep1> <dep2>
-deno add <dep3> <dep4> -D # dev dependencies
+deno add <dep1> <dep2> --allow-scripts
+deno add <dep3> <dep4> --allow-scripts -D # dev dependencies
 ```
 
 [Dependencies](deps.json)

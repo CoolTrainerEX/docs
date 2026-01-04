@@ -4,10 +4,10 @@ Tauri is used to make GUI apps.
 
 ## Usage
 
-### Installation
+### Initialization
 
 ```sh
-deno x create-tauri-app <name>
+deno init --npm tauri-app <name>
 cd <name>
 deno install
 ```

@@ -7,9 +7,9 @@ NextJS is used to make frontend websites.
 ### Initialization
 
 ```sh
-deno x shadcn init <name>
+deno x shadcn init
 cd <name>
-deno x create-playwright
+deno init --npm playwright
 deno install --allow-scripts
 ```
 
