@@ -1,7 +1,4 @@
 {
-    "deps": [
-        "npm:lucide-react"
-    ],
     "dev": [
         "npm:vitest",
         "npm:@vitejs/plugin-react jsdom",
