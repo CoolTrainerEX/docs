@@ -2,9 +2,9 @@
 
 Docs for my personal programming paradigms.
 
-- [C++](cpp/README.md)
-- [Go](go/README.md)
-- [JavaScript](javascript/README.md)
-- [Kotlin](kotlin/README.md)
-- [Python](python/README.md)
-- [Rust](rust/README.md)
+- [C++](docs/cpp/README.md)
+- [Go](docs/go/README.md)
+- [JavaScript](docs/javascript/README.md)
+- [Kotlin](docs/kotlin/README.md)
+- [Python](docs/python/README.md)
+- [Rust](docs/rust/README.md)

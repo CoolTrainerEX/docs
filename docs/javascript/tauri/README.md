@@ -2,6 +2,8 @@
 
 Tauri is used to make GUI apps.
 
+- [NextJS](nextjs/README.md)
+
 ## Usage
 
 ### Initialization

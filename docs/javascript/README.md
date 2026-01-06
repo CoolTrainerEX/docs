@@ -2,6 +2,9 @@
 
 JavaScript is used for frontend web development.
 
+- [NextJS](nextjs/README.md)
+- [Tauri](tauri/README.md)
+
 ## Installation
 
 Install [Deno](https://deno.com/). For CSS Preprocessor, install [Sass](https://sass-lang.com/).

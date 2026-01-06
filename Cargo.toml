@@ -3,7 +3,21 @@ name = "docs"
 version = "0.1.0"
 authors = ["CoolTrainerEX"]
 edition = "2024"
-description = "CLI Tools for automation."
+description = "Docs for my personal programming paradigms."
+repository = "https://github.com/CoolTrainerEX/docs"
+license = "MIT"
+keywords = [
+    "cpp",
+    "go",
+    "javascript",
+    "nextjs",
+    "tauri",
+    "kotlin",
+    "fabric",
+    "python",
+    "rust",
+]
+
 
 [dependencies]
 anstream = "0.6.21"
