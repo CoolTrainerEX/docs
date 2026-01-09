@@ -21,7 +21,7 @@ Can use `vitest` template with `--example with-vitest`, but the template is bad,
 
 [Dependencies](deps.json)
 
-#### `next.config.ts`
+#### Edit `next.config.ts`
 
 ```ts
 const nextConfig: NextConfig = {
@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
 };
 ```
 
-#### `vite.config.mts`
+#### Create `vite.config.mts`
 
 ```ts
 import { defineConfig } from 'vitest/config'
@@ -44,7 +44,7 @@ export default defineConfig({
 })
 ```
 
-#### `package.json`
+#### Edit `package.json`
 
 ```json
 {

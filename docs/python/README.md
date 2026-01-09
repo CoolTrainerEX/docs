@@ -30,7 +30,13 @@ uv add <dep3> <dep4> --dev # dev dependencies
 sphinx-quickstart ./docs/ --ext-autodoc # Follow pyproject.toml version, author, etc.
 ```
 
-#### `pyproject.toml`
+#### Create `docs/.gitignore`
+
+```gitignore
+/_*
+```
+
+#### Edit `pyproject.toml`
 
 ```toml
 [tool.ruff.lint]
@@ -40,13 +46,7 @@ select = ["D"]
 convention = "google"
 ```
 
-#### `.gitignore`
-
-```gitignore
-/docs/_*/
-```
-
-#### `docs/conf.py`
+#### Edit `docs/conf.py`
 
 ```py
 import sys
@@ -57,7 +57,7 @@ extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
 sys.path.insert(0, str(Path("..").resolve()))
 ```
 
-#### `docs/index.rst`
+#### Edit `docs/index.rst`
 
 ```rst
 .. toctree::

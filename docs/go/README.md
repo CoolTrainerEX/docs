@@ -29,7 +29,7 @@ go get -tool <dep4>
 
 [Dependencies](deps.json)
 
-#### compose.yaml
+#### Edit `compose.yaml`
 
 Uncomment Postgres image, then:
 

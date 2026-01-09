@@ -24,7 +24,7 @@ deno install -A -g npm:@redocly/cli
 go tool cobra-cli init -a <username> -l <license> --viper
 ```
 
-#### `internal/api/api.go`
+#### Create `internal/api/api.go`
 
 ```go
 package api
@@ -32,7 +32,7 @@ package api
 //go:generate go tool oapi-codegen -config ./cfg.yaml ../../openapi.yaml
 ```
 
-#### `internal/api/cfg.yaml`
+#### Create `internal/api/cfg.yaml`
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
@@ -44,7 +44,7 @@ generate:
 output: gen.go
 ```
 
-#### `internal/db/model/model.go`
+#### Create `internal/db/model/model.go`
 
 ```go
 package model

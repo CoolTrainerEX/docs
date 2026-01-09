@@ -12,7 +12,7 @@ Follow [NextJS](../../nextjs/README.md) Initialization.
 
 [Dependencies](deps.json)
 
-#### `package.json`
+#### Edit `package.json`
 
 ```json
 {

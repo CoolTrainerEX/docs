@@ -58,13 +58,13 @@ conan install . -s build_type=Debug --build=missing
 doxygen -g
 ```
 
-#### `.gitignore`
+#### Create `.gitignore`
 
 ```gitignore
 /build
 ```
 
-#### Doxyfile
+#### Edit `Doxyfile`
 
 ```sh
 OUTPUT_DIRECTORY       = ./docs/
