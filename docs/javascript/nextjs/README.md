@@ -13,46 +13,24 @@ deno init --npm playwright
 deno install --allow-scripts
 ```
 
-Might need to run in a subdirectory if the current directory contains `desktop.ini` for customizations.
+Might need to run in a subdirectory if the current directory contains
+`desktop.ini` for customizations.
 
-Can use `vitest` template with `--example with-vitest`, but the template is bad, so just use [manual setup](https://nextjs.org/docs/app/guides/testing/vitest).
+Can use `vitest` template with `--example with-vitest`, but the template is bad,
+so just use [manual setup](https://nextjs.org/docs/app/guides/testing/vitest).
 
 #### Dependencies
 
 [Dependencies](deps.json)
 
-#### Edit `next.config.ts`
+#### Create
 
-```ts
-const nextConfig: NextConfig = {
-  output: "export",
-};
-```
+- [`vite.config.mts`](create/vite.config.ts)
 
-#### Create `vite.config.mts`
+#### Edit
 
-```ts
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
- 
-export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
-  test: {
-    environment: 'jsdom',
-  },
-})
-```
-
-#### Edit `package.json`
-
-```json
-{
-  "scripts": {
-    "test": "vitest"
-  }
-}
-```
+- [`next.config.ts`](edit/next.config.ts)
+- [`package.json`](edit/package.json)
 
 ### Run
 

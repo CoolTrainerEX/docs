@@ -29,16 +29,9 @@ go get -tool <dep4>
 
 [Dependencies](deps.json)
 
-#### Edit `compose.yaml`
+#### Edit
 
-Uncomment Postgres image, then:
-
-```yaml
-services:
-  db:
-    volumes:
-      - db-data:/var/lib/postgresql # Remove /data
-```
+- [`compose.yaml`](edit/compose.yaml)
 
 ### Run
 

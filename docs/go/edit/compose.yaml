@@ -1,0 +1,6 @@
+# Uncomment Postgres image, then:
+
+services:
+  db:
+    volumes:
+      - db-data:/var/lib/postgresql # Remove /data

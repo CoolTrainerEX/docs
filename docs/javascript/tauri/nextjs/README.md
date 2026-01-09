@@ -12,15 +12,9 @@ Follow [NextJS](../../nextjs/README.md) Initialization.
 
 [Dependencies](deps.json)
 
-#### Edit `package.json`
+#### Edit
 
-```json
-{
-  "scripts": {
-    "tauri": "tauri"
-  }
-}
-```
+- [`package.json`](edit/package.json)
 
 #### continued
 

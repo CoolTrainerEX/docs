@@ -10,7 +10,13 @@
             ]
         },
         "dialoguer",
-        "figment",
+        {
+            "name": "figment",
+            "features": [
+                "env",
+                "toml"
+            ]
+        },
         "indicatif",
         {
             "name": "serde",

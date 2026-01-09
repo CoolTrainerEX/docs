@@ -2,7 +2,6 @@ use std::path::PathBuf;
 
 use anyhow::anyhow;
 use clap::Subcommand;
-use tracing::instrument;
 
 use crate::{
     Commands, Generator, OptionalSubcommands,
@@ -63,7 +62,7 @@ impl Commands for RootCommands {
 pub struct Root {}
 
 impl Generator for Root {
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&self, _name: String) -> anyhow::Result<()> {
         Err(anyhow!("Select a generator."))
     }
 

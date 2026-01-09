@@ -30,44 +30,15 @@ uv add <dep3> <dep4> --dev # dev dependencies
 sphinx-quickstart ./docs/ --ext-autodoc # Follow pyproject.toml version, author, etc.
 ```
 
-#### Create `docs/.gitignore`
+#### Create
 
-```gitignore
-/_*
-```
+- [`docs/.gitignore`](create/docs/.gitignore)
 
-#### Edit `pyproject.toml`
+#### Edit
 
-```toml
-[tool.ruff.lint]
-select = ["D"]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
-```
-
-#### Edit `docs/conf.py`
-
-```py
-import sys
-from pathlib import Path
-
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
-
-sys.path.insert(0, str(Path("..").resolve()))
-```
-
-#### Edit `docs/index.rst`
-
-```rst
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-   
-   modules
-```
-
-Add `modules` line
+- [`pyproject.toml`](edit/pyproject.toml)
+- [`docs/conf.py`](edit/docs/conf.py)
+- [`docs/index.rst`](edit/docs/index.rst)
 
 ### Run
 

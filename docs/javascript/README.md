@@ -13,6 +13,8 @@ Install [Deno](https://deno.com/). For CSS Preprocessor, install [Sass](https://
 
 ### Initialization
 
+Follow individual initializations, or:
+
 ```sh
 deno init <name>
 ```
