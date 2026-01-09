@@ -28,10 +28,8 @@ dialoguer = "0.12.0"
 figment = "0.10.19"
 indicatif = "0.18.3"
 serde = { version = "1.0.228", features = ["derive"] }
-thiserror = "2.0.17"
 tracing = "0.1.44"
 tracing-indicatif = "0.3.14"
-validator = { version = "0.20.0", features = ["derive"] }
 
 [dev-dependencies]
 assert_cmd = "2.1.1"

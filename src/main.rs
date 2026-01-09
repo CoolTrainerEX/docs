@@ -1,5 +1,6 @@
 use anyhow::Result;
 use clap::Parser;
+use dialoguer::Input;
 use docs::{
     Commands, OptionalSubcommands,
     commands::{Root, RootCommands},
@@ -29,7 +30,13 @@ fn main() -> Result<()> {
     if args.docs {
         generator.docs_path();
     } else {
-        generator.generate()?;
+        generator.generate(match args.name {
+            Some(name) => name,
+            None => Input::new()
+                .with_prompt("Project name")
+                .interact_text()
+                .unwrap(),
+        })?;
     }
 
     Ok(())

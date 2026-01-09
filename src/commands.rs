@@ -2,6 +2,7 @@ use std::path::PathBuf;
 
 use anyhow::anyhow;
 use clap::Subcommand;
+use tracing::instrument;
 
 use crate::{
     Commands, Generator, OptionalSubcommands,
@@ -58,7 +59,7 @@ impl Commands for RootCommands {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct Root {}
 
 impl Generator for Root {
