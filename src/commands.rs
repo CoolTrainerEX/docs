@@ -1,8 +1,18 @@
+use std::path::PathBuf;
+
+use anyhow::anyhow;
 use clap::Subcommand;
 
 use crate::{
     Commands, Generator, OptionalSubcommands,
-    commands::{go::GoCommands, javascript::JSCommands, kotlin::KTCommands},
+    commands::{
+        cpp::Cpp,
+        go::{Go, GoCommands},
+        javascript::{JSCommands, Javascript},
+        kotlin::{KTCommands, Kotlin},
+        python::Python,
+        rust::Rust,
+    },
 };
 
 mod cpp;
@@ -27,19 +37,36 @@ pub enum RootCommands {
 }
 
 impl Commands for RootCommands {
-    fn generator(self) -> impl Generator {
-        Root {}
+    fn generator(self) -> Box<dyn Generator> {
+        match self {
+            RootCommands::Cpp => Box::new(Cpp::default()),
+            RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
+                Some(c) => c.generator(),
+                None => Box::new(Go::default()),
+            },
+            RootCommands::Javascript(optional_subcommands) => match optional_subcommands.command {
+                Some(c) => c.generator(),
+                None => Box::new(Javascript::default()),
+            },
+            RootCommands::Kotlin(optional_subcommands) => match optional_subcommands.command {
+                Some(c) => c.generator(),
+                None => Box::new(Kotlin::default()),
+            },
+            RootCommands::Python => Box::new(Python::default()),
+            RootCommands::Rust => Box::new(Rust::default()),
+        }
     }
 }
 
+#[derive(Default)]
 pub struct Root {}
 
 impl Generator for Root {
-    fn generate(name: Option<String>) -> anyhow::Result<()> {
-        todo!()
+    fn generate(&self, name: String) -> anyhow::Result<()> {
+        Err(anyhow!("Select a generator."))
     }
 
-    fn docs_path() -> std::path::PathBuf {
-        todo!()
+    fn docs_path(&self) -> PathBuf {
+        PathBuf::from(".")
     }
 }

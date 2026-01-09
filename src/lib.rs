@@ -9,16 +9,16 @@ pub mod commands;
 #[derive(Args)]
 pub struct OptionalSubcommands<T: Subcommand> {
     #[command(subcommand)]
-    command: Option<T>,
+    pub command: Option<T>,
 }
 
 /// Commands enum trait
-trait Commands {
-    /// Gets the generator for each enum value.
+pub trait Commands {
+    /// Gets the generator for the command to execute.
     ///
     /// # Returns
-    /// - The [`Generator`] for the enum value
-    fn generator(self) -> impl Generator;
+    /// - The generator function
+    fn generator(self) -> Box<dyn Generator>;
 }
 
 /// Project generators
@@ -26,17 +26,17 @@ pub trait Generator {
     /// Generate the project.
     ///
     /// # Parameters
-    /// - `name` - Optional name value. Will prompt if [`None`].
+    /// - `name` - Name value
     ///
     /// # Returns
     /// - Process [`Result`]
-    fn generate(name: Option<String>) -> Result<()>;
+    fn generate(&self, name: String) -> Result<()>;
 
-    /// Opens the documentation for the project generation.
+    /// Returns the relative documentation path
     ///
     /// # Returns
-    /// - Process [`Result`]
-    fn docs_path() -> PathBuf;
+    /// - Documentation path
+    fn docs_path(&self) -> PathBuf;
 }
 
 #[cfg(test)]

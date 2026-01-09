@@ -1,6 +1,9 @@
 use anyhow::Result;
 use clap::Parser;
-use docs::{OptionalSubcommands, commands::RootCommands};
+use docs::{
+    Commands, OptionalSubcommands,
+    commands::{Root, RootCommands},
+};
 
 #[derive(Parser)]
 #[command(version, about)]
@@ -17,5 +20,17 @@ struct Args {
 
 fn main() -> Result<()> {
     let args = Args::parse();
+
+    let generator = match args.command.command {
+        Some(c) => c.generator(),
+        None => Box::new(Root::default()),
+    };
+
+    if args.docs {
+        generator.docs_path();
+    } else {
+        generator.generate()?;
+    }
+
     Ok(())
 }
