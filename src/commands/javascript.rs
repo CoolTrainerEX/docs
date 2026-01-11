@@ -1,6 +1,9 @@
 use std::process::Command;
 
+use anstream::println;
+use anstyle::{AnsiColor, Style};
 use clap::Subcommand;
+use tracing::info;
 
 use crate::commands::{
     Commands, Generator,
@@ -39,6 +42,7 @@ impl Commands for JSCommands {
 }
 
 /// JavaScript generator
+#[derive(Debug)]
 pub(super) struct JavaScript;
 
 impl Generator for JavaScript {
@@ -53,6 +57,17 @@ impl Generator for JavaScript {
 
 impl Upgrade for JavaScript {
     fn upgrade(&self) -> anyhow::Result<()> {
-        execute_command(Command::new("deno").arg("clean"))
+        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
+
+        info!("Upgrading JavaScript.");
+        println!("{msg_style}Upgrading JavaScript.{msg_style:#}");
+        info!("Clearing cache.");
+
+        execute_command(Command::new("deno").arg("clean"))?;
+
+        info!("Done.");
+        info!("Done upgrading JavaScript.");
+
+        Ok(())
     }
 }

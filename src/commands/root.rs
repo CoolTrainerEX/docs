@@ -72,7 +72,7 @@ impl Commands for RootCommands {
 /// Root generator
 ///
 /// Generator returns an error.
-#[derive(Default, Debug)]
+#[derive(Debug)]
 pub struct Root;
 
 impl Generator for Root {

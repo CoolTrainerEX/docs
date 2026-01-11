@@ -53,24 +53,23 @@ pub fn upgrade() -> Result<()> {
     println!("{msg_style}Upgrading.{msg_style:#}");
     info!("Upgrading Scoop apps.");
 
-    execute_command(Command::new("scoop").args(["update", "-a"]))?;
+    execute_command(Command::new("scoop.cmd").args(["update", "-a"]))?;
     bar.inc(1);
-    execute_command(Command::new("scoop").args(["cleanup", "-a", "-k"]))?;
+
+    info!("Done.");
+    info!("Clearing cache.");
+
+    execute_command(Command::new("scoop.cmd").args(["cleanup", "-a", "-k"]))?;
     bar.inc(1);
 
     info!("Done.");
 
-    for (i, upgrade) in upgrades.iter().enumerate() {
-        info!("Upgrading app.");
-        info!(index = i);
-
+    for upgrade in upgrades {
         upgrade.upgrade()?;
         bar.inc(1);
-
-        info!("Done.");
     }
 
-    info!("Done.");
+    info!("Done upgrading.");
 
     bar.finish_and_clear();
 

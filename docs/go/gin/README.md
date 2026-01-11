@@ -24,33 +24,11 @@ deno install -A -g npm:@redocly/cli
 go tool cobra-cli init -a <username> -l <license> --viper
 ```
 
-#### Create `internal/api/api.go`
+#### Create
 
-```go
-package api
-
-//go:generate go tool oapi-codegen -config ./cfg.yaml ../../openapi.yaml
-```
-
-#### Create `internal/api/cfg.yaml`
-
-```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
-package: api
-generate:
-  gin-server: true
-  models: true
-  strict-server: true
-output: gen.go
-```
-
-#### Create `internal/db/model/model.go`
-
-```go
-package model
-
-//go:generate go tool gorm gen -i ./model.go
-```
+- [`internal/api/api.go`](create/internal/api/api.go)
+- [`internal/api/cfg.yaml`](create/internal/api/cfg.yaml)
+- [`internal/db/model/model.go`](create/internal/db/model/model.go)  
 
 ## Docs
 

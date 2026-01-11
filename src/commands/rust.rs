@@ -4,26 +4,28 @@ use anstream::println;
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
 use indicatif::ProgressBar;
-use tracing::info;
+use tracing::{info, instrument};
 
 use crate::commands::{Generator, root::Root, utils::execute_command};
 
 /// Rust generator
+#[derive(Debug)]
 pub(super) struct Rust;
 
 impl Generator for Rust {
+    #[instrument]
     fn generate(&self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(2);
 
-        info!("Generating project.");
+        info!("Generating Rust project.");
 
         let current_dir = env::current_dir().context("Failed to get current directory")?;
         let proj_dir = current_dir.join(&name);
 
         println!(
-            "{msg_style}Generating project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
+            "{msg_style}Generating Rust project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
             proj_dir.display()
         );
         info!("Running init command.");
