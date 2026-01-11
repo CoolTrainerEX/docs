@@ -45,7 +45,7 @@ pub fn config_dir_exists_or_gen() -> Result<()> {
     } else {
         info!("Config directory not found.");
         eprintln!("{error_style}Config directory does not exist.{error_style:#}");
-        Root::default().generate(String::new())
+        Root.generate(String::new())
     }
 }
 

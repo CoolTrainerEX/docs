@@ -1,12 +1,16 @@
+use std::process::Command;
+
 use clap::Subcommand;
 
 use crate::commands::{
-    Commands, Generator, OptionalSubcommands,
+    Commands, Generator,
     javascript::{
         nextjs::NextJS,
         tauri::{Tauri, TauriCommands},
     },
     root::Root,
+    upgrade::Upgrade,
+    utils::{OptionalSubcommands, execute_command},
 };
 
 mod nextjs;
@@ -25,17 +29,16 @@ pub enum JSCommands {
 impl Commands for JSCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
-            JSCommands::NextJS => Box::new(NextJS::default()),
+            JSCommands::NextJS => Box::new(NextJS),
             JSCommands::Tauri(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(Tauri::default()),
+                None => Box::new(Tauri),
             },
         }
     }
 }
 
 /// JavaScript generator
-#[derive(Default)]
 pub(super) struct JavaScript;
 
 impl Generator for JavaScript {
@@ -44,6 +47,12 @@ impl Generator for JavaScript {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("javascript")
+        Root.docs_path().join("javascript")
+    }
+}
+
+impl Upgrade for JavaScript {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        execute_command(Command::new("deno").arg("clean"))
     }
 }

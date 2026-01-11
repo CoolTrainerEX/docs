@@ -1,7 +1,6 @@
 use crate::commands::{Generator, javascript::tauri::Tauri};
 
 /// Tauri NextJS generator
-#[derive(Default)]
 pub(super) struct NextJS;
 
 impl Generator for NextJS {
@@ -10,6 +9,6 @@ impl Generator for NextJS {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Tauri::default().docs_path().join("nextjs")
+        Tauri.docs_path().join("nextjs")
     }
 }

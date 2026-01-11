@@ -1,7 +1,8 @@
-use crate::commands::{Generator, root::Root};
+use std::process::Command;
+
+use crate::commands::{Generator, root::Root, upgrade::Upgrade, utils::execute_command};
 
 /// C++ generator
-#[derive(Default)]
 pub(super) struct Cpp;
 
 impl Generator for Cpp {
@@ -10,6 +11,12 @@ impl Generator for Cpp {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("cpp")
+        Root.docs_path().join("cpp")
+    }
+}
+
+impl Upgrade for Cpp {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        execute_command(Command::new("conan").args(["cache", "clean"]))
     }
 }

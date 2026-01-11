@@ -1,8 +1,9 @@
-use crate::commands::{Generator, kotlin::Kotlin};
+use std::process::Command;
+
+use crate::commands::{Generator, kotlin::Kotlin, upgrade::Upgrade, utils::execute_command};
 
 /// Fabric generator
-#[derive(Default)]
-pub(super) struct Fabric;
+pub(crate) struct Fabric;
 
 impl Generator for Fabric {
     fn generate(&self, name: String) -> anyhow::Result<()> {
@@ -10,6 +11,12 @@ impl Generator for Fabric {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Kotlin::default().docs_path().join("fabric")
+        Kotlin.docs_path().join("fabric")
+    }
+}
+
+impl Upgrade for Fabric {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        execute_command(Command::new("fabric").arg("upgrade"))
     }
 }

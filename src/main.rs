@@ -5,10 +5,7 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use dialoguer::{Input, theme::ColorfulTheme};
 use docs::{
-    commands::{
-        Commands, OptionalSubcommands,
-        root::{Root, RootCommands},
-    },
+    commands::{Commands, Subcommands, root::Root, upgrade::upgrade, utils::OptionalSubcommands},
     config_dir, config_dir_exists_or_gen, default_config,
 };
 use figment::{
@@ -36,7 +33,7 @@ struct Args {
     /// Project name.
     name: Option<String>,
     #[command(flatten)]
-    command: OptionalSubcommands<RootCommands>,
+    command: OptionalSubcommands<Subcommands>,
 }
 
 #[derive(Deserialize, Validate)]
@@ -74,14 +71,18 @@ fn main() -> Result<()> {
 
     config.validate().context("Invalid config values.")?;
 
-    // Flag to check if the command is root to decide if name prompt will be shown.
     let mut is_root = false;
 
     let generator = match args.command.command {
-        Some(c) => c.generator(),
+        Some(s) => match s {
+            Subcommands::Generate(root_commands) => root_commands.generator(),
+            Subcommands::Upgrade => {
+                return upgrade();
+            }
+        },
         None => {
             is_root = true;
-            Box::new(Root::default())
+            Box::new(Root)
         }
     };
 

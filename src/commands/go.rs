@@ -1,8 +1,12 @@
+use std::process::Command;
+
 use clap::Subcommand;
 
-use crate::commands::{Commands, Generator, go::gin::Gin, root::Root};
+use crate::commands::{
+    Commands, Generator, go::gin::Gin, root::Root, upgrade::Upgrade, utils::execute_command,
+};
 
-mod gin;
+pub(super) mod gin;
 
 #[derive(Subcommand)]
 pub enum GoCommands {
@@ -13,13 +17,12 @@ pub enum GoCommands {
 impl Commands for GoCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
-            GoCommands::Gin => Box::new(Gin::default()),
+            GoCommands::Gin => Box::new(Gin),
         }
     }
 }
 
 /// Go generator
-#[derive(Default)]
 pub(super) struct Go;
 
 impl Generator for Go {
@@ -28,6 +31,18 @@ impl Generator for Go {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("go")
+        Root.docs_path().join("go")
+    }
+}
+
+impl Upgrade for Go {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        execute_command(Command::new("go").args([
+            "clean",
+            "-cache",
+            "-testcache",
+            "-modcache",
+            "-fuzzcache",
+        ]))
     }
 }

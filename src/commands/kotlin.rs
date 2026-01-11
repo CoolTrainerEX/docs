@@ -2,11 +2,8 @@ use clap::Subcommand;
 
 use crate::commands::{Commands, Generator, kotlin::fabric::Fabric, root::Root};
 
-mod fabric;
+pub(super) mod fabric;
 
-/// Kotlin generator
-///
-/// Generator returns an error.
 #[derive(Subcommand)]
 pub enum KTCommands {
     /// Generate Fabric projects.
@@ -16,12 +13,14 @@ pub enum KTCommands {
 impl Commands for KTCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
-            KTCommands::Fabric => Box::new(Fabric::default()),
+            KTCommands::Fabric => Box::new(Fabric),
         }
     }
 }
 
-#[derive(Default)]
+/// Kotlin generator
+///
+/// Generator returns an error.
 pub(super) struct Kotlin;
 
 impl Generator for Kotlin {
@@ -30,6 +29,6 @@ impl Generator for Kotlin {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("kotlin")
+        Root.docs_path().join("kotlin")
     }
 }

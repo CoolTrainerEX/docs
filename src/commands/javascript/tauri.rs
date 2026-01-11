@@ -17,13 +17,12 @@ pub enum TauriCommands {
 impl Commands for TauriCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
-            TauriCommands::NextJS => Box::new(NextJS::default()),
+            TauriCommands::NextJS => Box::new(NextJS),
         }
     }
 }
 
 /// Tauri generator
-#[derive(Default)]
 pub(super) struct Tauri;
 
 impl Generator for Tauri {
@@ -32,6 +31,6 @@ impl Generator for Tauri {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        JavaScript::default().docs_path().join("tauri")
+        JavaScript.docs_path().join("tauri")
     }
 }

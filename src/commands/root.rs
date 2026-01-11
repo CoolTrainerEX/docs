@@ -10,13 +10,14 @@ use tracing::{info, instrument};
 use crate::{
     DEFAULT_CONFIG_DIR, DOCS_DIR,
     commands::{
-        Commands, Generator, OptionalSubcommands,
+        Commands, Generator,
         cpp::Cpp,
         go::{Go, GoCommands},
         javascript::{JSCommands, JavaScript},
         kotlin::{KTCommands, Kotlin},
         python::Python,
         rust::Rust,
+        utils::OptionalSubcommands,
     },
     config_dir,
 };
@@ -49,21 +50,21 @@ pub enum RootCommands {
 impl Commands for RootCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
-            RootCommands::Cpp => Box::new(Cpp::default()),
+            RootCommands::Cpp => Box::new(Cpp),
             RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(Go::default()),
+                None => Box::new(Go),
             },
             RootCommands::JavaScript(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(JavaScript::default()),
+                None => Box::new(JavaScript),
             },
             RootCommands::Kotlin(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(Kotlin::default()),
+                None => Box::new(Kotlin),
             },
-            RootCommands::Python => Box::new(Python::default()),
-            RootCommands::Rust => Box::new(Rust::default()),
+            RootCommands::Python => Box::new(Python),
+            RootCommands::Rust => Box::new(Rust),
         }
     }
 }
@@ -79,7 +80,6 @@ impl Generator for Root {
     fn generate(&self, _name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-
         let bar = ProgressBar::new(4);
 
         info!("Generating config directory.");

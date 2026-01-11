@@ -1,7 +1,8 @@
-use crate::commands::{Generator, root::Root};
+use std::process::Command;
+
+use crate::commands::{Generator, root::Root, upgrade::Upgrade, utils::execute_command};
 
 /// Python generator
-#[derive(Default)]
 pub(super) struct Python;
 
 impl Generator for Python {
@@ -10,6 +11,13 @@ impl Generator for Python {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("python")
+        Root.docs_path().join("python")
+    }
+}
+
+impl Upgrade for Python {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        execute_command(Command::new("uv").args(["tool", "upgrade", "--all"]))?;
+        execute_command(Command::new("uv").args(["cache", "prune"]))
     }
 }

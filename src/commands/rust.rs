@@ -6,17 +6,15 @@ use anyhow::Context;
 use indicatif::ProgressBar;
 use tracing::info;
 
-use crate::commands::{Generator, execute_command, root::Root};
+use crate::commands::{Generator, root::Root, utils::execute_command};
 
 /// Rust generator
-#[derive(Default)]
 pub(super) struct Rust;
 
 impl Generator for Rust {
     fn generate(&self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-
         let bar = ProgressBar::new(2);
 
         info!("Generating project.");
@@ -50,6 +48,6 @@ impl Generator for Rust {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Root::default().docs_path().join("rust")
+        Root.docs_path().join("rust")
     }
 }
