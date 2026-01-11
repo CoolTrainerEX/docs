@@ -1,9 +1,6 @@
 use clap::Subcommand;
 
-use crate::{
-    Commands, Generator,
-    commands::{Root, go::gin::Gin},
-};
+use crate::commands::{Commands, Generator, go::gin::Gin, root::Root};
 
 mod gin;
 

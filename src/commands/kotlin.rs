@@ -1,9 +1,6 @@
 use clap::Subcommand;
 
-use crate::{
-    Commands, Generator,
-    commands::{Root, kotlin::fabric::Fabric},
-};
+use crate::commands::{Commands, Generator, kotlin::fabric::Fabric, root::Root};
 
 mod fabric;
 

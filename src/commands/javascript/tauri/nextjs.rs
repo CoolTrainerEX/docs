@@ -1,4 +1,4 @@
-use crate::{Generator, commands::javascript::tauri::Tauri};
+use crate::commands::{Generator, javascript::tauri::Tauri};
 
 /// Tauri NextJS generator
 #[derive(Default)]

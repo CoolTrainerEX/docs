@@ -5,8 +5,10 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use dialoguer::{Input, theme::ColorfulTheme};
 use docs::{
-    Commands, OptionalSubcommands,
-    commands::{Root, RootCommands},
+    commands::{
+        Commands, OptionalSubcommands,
+        root::{Root, RootCommands},
+    },
     config_dir, config_dir_exists_or_gen, default_config,
 };
 use figment::{

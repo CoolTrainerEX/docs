@@ -1,4 +1,4 @@
-use crate::{Generator, commands::Root};
+use crate::commands::{Generator, root::Root};
 
 /// C++ generator
 #[derive(Default)]

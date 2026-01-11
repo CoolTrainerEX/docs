@@ -1,4 +1,4 @@
-use crate::{Generator, commands::javascript::JavaScript};
+use crate::commands::{Generator, javascript::JavaScript};
 
 /// NextJS generator
 #[derive(Default)]

@@ -1,4 +1,4 @@
-use crate::{Generator, commands::go::Go};
+use crate::commands::{Generator, go::Go};
 
 /// Gin generator
 #[derive(Default)]

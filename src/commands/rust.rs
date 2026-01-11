@@ -6,7 +6,7 @@ use anyhow::Context;
 use indicatif::ProgressBar;
 use tracing::info;
 
-use crate::{Generator, commands::Root, execute_command};
+use crate::commands::{Generator, execute_command, root::Root};
 
 /// Rust generator
 #[derive(Default)]

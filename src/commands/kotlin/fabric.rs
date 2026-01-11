@@ -1,4 +1,4 @@
-use crate::{Generator, commands::kotlin::Kotlin};
+use crate::commands::{Generator, kotlin::Kotlin};
 
 /// Fabric generator
 #[derive(Default)]

@@ -1,8 +1,8 @@
 use clap::Subcommand;
 
-use crate::{
+use crate::commands::{
     Commands, Generator,
-    commands::javascript::{JavaScript, tauri::nextjs::NextJS},
+    javascript::{JavaScript, tauri::nextjs::NextJS},
 };
 
 mod nextjs;

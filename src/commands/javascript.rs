@@ -1,14 +1,12 @@
 use clap::Subcommand;
 
-use crate::{
-    Commands, Generator,
-    commands::{
-        OptionalSubcommands, Root,
-        javascript::{
-            nextjs::NextJS,
-            tauri::{Tauri, TauriCommands},
-        },
+use crate::commands::{
+    Commands, Generator, OptionalSubcommands,
+    javascript::{
+        nextjs::NextJS,
+        tauri::{Tauri, TauriCommands},
     },
+    root::Root,
 };
 
 mod nextjs;

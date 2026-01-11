@@ -1,144 +1,66 @@
-use std::{fs, path::PathBuf};
+use std::{ffi::OsStr, iter, path::PathBuf, process::Command};
 
-use anstream::println;
-use anstyle::{AnsiColor, Style};
-use anyhow::Context;
-use clap::Subcommand;
-use indicatif::ProgressBar;
-use tracing::{info, instrument};
-
-use crate::{
-    Commands, DEFAULT_CONFIG_DIR, DOCS_DIR, Generator, OptionalSubcommands,
-    commands::{
-        cpp::Cpp,
-        go::{Go, GoCommands},
-        javascript::{JSCommands, JavaScript},
-        kotlin::{KTCommands, Kotlin},
-        python::Python,
-        rust::Rust,
-    },
-    config_dir,
-};
+use anstyle::Style;
+use anyhow::{Context, Result, anyhow};
+use clap::{Args, Subcommand};
 
 mod cpp;
 mod go;
 mod javascript;
 mod kotlin;
 mod python;
+pub mod root;
 mod rust;
 
-#[derive(Subcommand)]
-pub enum RootCommands {
-    /// Generate C++ projects.
-    Cpp,
-
-    /// Generate Go projects.
-    Go(OptionalSubcommands<GoCommands>),
-
-    /// Generate JavaScript projects.
-    #[command(alias = "js")]
-    JavaScript(OptionalSubcommands<JSCommands>),
-
-    /// Generate Kotlin projects.
-    #[command(alias = "kt")]
-    Kotlin(OptionalSubcommands<KTCommands>),
-
-    /// Generate Python projects.
-    #[command(alias = "py")]
-    Python,
-
-    /// Generate Rust projects.
-    #[command(alias = "rs")]
-    Rust,
+/// Subcommands wrapped with [`Option`]
+#[derive(Args)]
+pub struct OptionalSubcommands<T: Subcommand> {
+    #[command(subcommand)]
+    pub command: Option<T>,
 }
 
-impl Commands for RootCommands {
-    fn generator(self) -> Box<dyn Generator> {
-        match self {
-            RootCommands::Cpp => Box::new(Cpp::default()),
-            RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
-                Some(c) => c.generator(),
-                None => Box::new(Go::default()),
-            },
-            RootCommands::JavaScript(optional_subcommands) => match optional_subcommands.command {
-                Some(c) => c.generator(),
-                None => Box::new(JavaScript::default()),
-            },
-            RootCommands::Kotlin(optional_subcommands) => match optional_subcommands.command {
-                Some(c) => c.generator(),
-                None => Box::new(Kotlin::default()),
-            },
-            RootCommands::Python => Box::new(Python::default()),
-            RootCommands::Rust => Box::new(Rust::default()),
-        }
-    }
+/// Commands enum trait
+pub trait Commands {
+    /// Gets the generator for the command to execute.
+    ///
+    /// # Returns
+    /// - The generator function
+    fn generator(self) -> Box<dyn Generator>;
 }
 
-/// Root generator
-///
-/// Generator returns an error.
-#[derive(Default, Debug)]
-pub struct Root;
+/// Project generators
+pub trait Generator {
+    /// Generate the project.
+    ///
+    /// # Parameters
+    /// - `name` - Name value
+    ///
+    /// # Returns
+    /// - Process [`Result`]
+    fn generate(&self, name: String) -> Result<()>;
 
-impl Generator for Root {
-    #[instrument]
-    fn generate(&self, _name: String) -> anyhow::Result<()> {
-        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
-        let strong_style = Style::new().bold();
+    /// Returns the relative documentation path
+    ///
+    /// # Returns
+    /// - Documentation path
+    fn docs_path(&self) -> PathBuf;
+}
 
-        let bar = ProgressBar::new(4);
+fn execute_command(command: &mut Command) -> Result<()> {
+    let strong_style = Style::new().bold();
+    let cmd_str = iter::once(command.get_program())
+        .chain(command.get_args())
+        .collect::<Vec<_>>()
+        .join(OsStr::new(" "));
 
-        info!("Generating config directory.");
+    let status = command.status().context(format!(
+        "Failed to execute {strong_style}{}{strong_style:#}.",
+        cmd_str.display()
+    ))?;
 
-        let config_dir = config_dir();
-
-        println!(
-            "{msg_style}Generating config directory in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
-            config_dir.display()
-        );
-        info!("Creating config directory");
-        info!(path = config_dir.to_str());
-
-        fs::create_dir_all(&config_dir).context("Failed to create config directory.")?;
-        bar.inc(1);
-
-        info!("Done");
-        info!("Generating config files");
-
-        DEFAULT_CONFIG_DIR
-            .extract(&config_dir)
-            .context("Failed to generate config files.")?;
-
-        bar.inc(1);
-
-        info!("Done");
-        info!("Creating documentation directory");
-
-        let docs_dir = config_dir.join("docs");
-
-        info!(path = docs_dir.to_str());
-
-        fs::create_dir_all(&docs_dir)?;
-        bar.inc(1);
-
-        info!("Done");
-        info!("Generating documentation files.");
-
-        DOCS_DIR
-            .extract(&docs_dir)
-            .context("Failed to generate documentation files")?;
-
-        bar.inc(1);
-
-        info!("Done");
-        info!("Done generating config directory.");
-
-        bar.finish_and_clear();
-
-        Ok(())
-    }
-
-    fn docs_path(&self) -> PathBuf {
-        PathBuf::from(".")
-    }
+    status.success().then_some(()).ok_or(anyhow!(
+        "Process {strong_style}{}{strong_style:#} failed. ({})",
+        cmd_str.display(),
+        status
+    ))
 }
