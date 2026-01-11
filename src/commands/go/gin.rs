@@ -1,7 +1,8 @@
 use crate::{Generator, commands::go::Go};
 
+/// Gin generator
 #[derive(Default)]
-pub struct Gin {}
+pub(super) struct Gin;
 
 impl Generator for Gin {
     fn generate(&self, name: String) -> anyhow::Result<()> {

@@ -1,7 +1,8 @@
-use crate::{Generator, commands::javascript::Javascript};
+use crate::{Generator, commands::javascript::JavaScript};
 
+/// NextJS generator
 #[derive(Default)]
-pub struct NextJS {}
+pub(super) struct NextJS;
 
 impl Generator for NextJS {
     fn generate(&self, name: String) -> anyhow::Result<()> {
@@ -9,6 +10,6 @@ impl Generator for NextJS {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Javascript::default().docs_path().join("nextjs")
+        JavaScript::default().docs_path().join("nextjs")
     }
 }

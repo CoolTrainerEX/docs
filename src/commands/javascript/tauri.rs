@@ -2,13 +2,15 @@ use clap::Subcommand;
 
 use crate::{
     Commands, Generator,
-    commands::javascript::{Javascript, tauri::nextjs::NextJS},
+    commands::javascript::{JavaScript, tauri::nextjs::NextJS},
 };
 
 mod nextjs;
 
 #[derive(Subcommand)]
 pub enum TauriCommands {
+    /// Generate Tauri NextJS projects.
+    #[command(alias = "next")]
     NextJS,
 }
 
@@ -20,8 +22,9 @@ impl Commands for TauriCommands {
     }
 }
 
+/// Tauri generator
 #[derive(Default)]
-pub struct Tauri {}
+pub(super) struct Tauri;
 
 impl Generator for Tauri {
     fn generate(&self, name: String) -> anyhow::Result<()> {
@@ -29,6 +32,6 @@ impl Generator for Tauri {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        Javascript::default().docs_path().join("tauri")
+        JavaScript::default().docs_path().join("tauri")
     }
 }

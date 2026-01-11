@@ -7,8 +7,12 @@ use crate::{
 
 mod fabric;
 
+/// Kotlin generator
+///
+/// Generator returns an error.
 #[derive(Subcommand)]
 pub enum KTCommands {
+    /// Generate Fabric projects.
     Fabric,
 }
 
@@ -21,7 +25,7 @@ impl Commands for KTCommands {
 }
 
 #[derive(Default)]
-pub struct Kotlin {}
+pub(super) struct Kotlin;
 
 impl Generator for Kotlin {
     fn generate(&self, name: String) -> anyhow::Result<()> {

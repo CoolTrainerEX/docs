@@ -26,13 +26,8 @@
         },
         "thiserror",
         "tracing",
-        "tracing_indicatif",
-        {
-            "name": "validator",
-            "features": [
-                "derive"
-            ]
-        }
+        "tracing-appender",
+        "tracing-subscriber"
     ],
     "dev": [
         "assert_cmd",

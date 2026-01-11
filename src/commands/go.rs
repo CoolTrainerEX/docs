@@ -9,6 +9,7 @@ mod gin;
 
 #[derive(Subcommand)]
 pub enum GoCommands {
+    /// Generate Gin projects.
     Gin,
 }
 
@@ -20,8 +21,9 @@ impl Commands for GoCommands {
     }
 }
 
+/// Go generator
 #[derive(Default)]
-pub struct Go {}
+pub(super) struct Go;
 
 impl Generator for Go {
     fn generate(&self, name: String) -> anyhow::Result<()> {

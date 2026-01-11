@@ -1,7 +1,8 @@
 use crate::{Generator, commands::Root};
 
+/// Python generator
 #[derive(Default)]
-pub struct Python {}
+pub(super) struct Python;
 
 impl Generator for Python {
     fn generate(&self, name: String) -> anyhow::Result<()> {

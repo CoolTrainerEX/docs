@@ -1,7 +1,8 @@
 use crate::{Generator, commands::kotlin::Kotlin};
 
+/// Fabric generator
 #[derive(Default)]
-pub struct Fabric {}
+pub(super) struct Fabric;
 
 impl Generator for Fabric {
     fn generate(&self, name: String) -> anyhow::Result<()> {

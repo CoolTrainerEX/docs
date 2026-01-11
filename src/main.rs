@@ -1,22 +1,20 @@
 use std::path::PathBuf;
 
-use anyhow::Result;
+use anstyle::Style;
+use anyhow::{Context, Result};
 use clap::Parser;
 use dialoguer::{Input, theme::ColorfulTheme};
 use docs::{
     Commands, OptionalSubcommands,
     commands::{Root, RootCommands},
+    config_dir, config_dir_exists_or_gen, default_config,
 };
 use figment::{
     Figment,
     providers::{Env, Format, Toml},
 };
 use serde::Deserialize;
-
-#[derive(Deserialize)]
-struct Config {
-    path: PathBuf,
-}
+use validator::Validate;
 
 #[derive(Parser)]
 #[command(version, about)]
@@ -24,44 +22,96 @@ struct Args {
     /// Open documentation.
     #[arg(short, long, global = true)]
     docs: bool,
-    /// Project name.
+
+    /// Open local documentation.
     #[arg(short, long, global = true)]
-    name: Option<String>,
+    local: bool,
+
     /// Config file path
-    #[arg(short, long, global = true, default_value = "config.toml")]
+    #[arg(short, long, global = true, default_value_os_t = default_config())]
     config: PathBuf,
+
+    /// Project name.
+    name: Option<String>,
     #[command(flatten)]
     command: OptionalSubcommands<RootCommands>,
 }
 
+#[derive(Deserialize, Validate)]
+struct Config {
+    /// Path to the documentation.
+    path: Option<PathBuf>,
+
+    /// URL to the documentation.
+    #[validate(url)]
+    url: Option<String>,
+}
+
 fn main() -> Result<()> {
+    let strong_style = Style::new().bold();
+
+    let (non_blocking, _guard) = tracing_appender::non_blocking(tracing_appender::rolling::hourly(
+        config_dir().join("log"),
+        "docs.log",
+    ));
+
+    tracing_subscriber::fmt()
+        .with_writer(non_blocking)
+        .with_ansi(false)
+        .init();
+
     let args = Args::parse();
+
+    config_dir_exists_or_gen()?;
 
     let config: Config = Figment::new()
         .merge(Toml::file_exact(args.config))
         .merge(Env::prefixed("DOCS_"))
-        .extract()?;
+        .extract()
+        .context("Failed to open config file.")?;
+
+    config.validate().context("Invalid config values.")?;
+
+    // Flag to check if the command is root to decide if name prompt will be shown.
+    let mut is_root = false;
 
     let generator = match args.command.command {
         Some(c) => c.generator(),
-        None => Box::new(Root::default()),
+        None => {
+            is_root = true;
+            Box::new(Root::default())
+        }
     };
 
     if args.docs {
-        let mut path = config.path.join(generator.docs_path());
-
-        path.push("README");
-        path.set_extension("md");
-
-        open::that(path)?;
+        open::that(
+            PathBuf::from(config.url.context(format!(
+                "Config missing {strong_style}url{strong_style:#} value"
+            ))?)
+            .join(generator.docs_path()),
+        )
+        .context("Failed to open documentation.")
+    } else if args.local {
+        open::that(
+            PathBuf::from(config.path.context(format!(
+                "Config missing {strong_style}path{strong_style:#} value"
+            ))?)
+            .join(generator.docs_path())
+            .join("README")
+            .with_extension("md"),
+        )
+        .context("Failed to open local documentation.")
     } else {
-        generator.generate(match args.name {
-            Some(name) => name,
-            None => Input::with_theme(&ColorfulTheme::default())
-                .with_prompt("Project name")
-                .interact_text()?,
-        })?;
+        generator.generate(if is_root {
+            String::new()
+        } else {
+            match args.name {
+                Some(name) => name,
+                None => Input::with_theme(&ColorfulTheme::default())
+                    .with_prompt("Project name")
+                    .interact_text()
+                    .context("Input error.")?,
+            }
+        })
     }
-
-    Ok(())
 }

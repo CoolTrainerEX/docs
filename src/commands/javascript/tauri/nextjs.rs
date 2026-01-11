@@ -1,7 +1,8 @@
 use crate::{Generator, commands::javascript::tauri::Tauri};
 
+/// Tauri NextJS generator
 #[derive(Default)]
-pub struct NextJS {}
+pub(super) struct NextJS;
 
 impl Generator for NextJS {
     fn generate(&self, name: String) -> anyhow::Result<()> {

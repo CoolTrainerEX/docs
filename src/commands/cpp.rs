@@ -1,7 +1,8 @@
 use crate::{Generator, commands::Root};
 
+/// C++ generator
 #[derive(Default)]
-pub struct Cpp {}
+pub(super) struct Cpp;
 
 impl Generator for Cpp {
     fn generate(&self, name: String) -> anyhow::Result<()> {

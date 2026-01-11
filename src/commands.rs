@@ -1,18 +1,23 @@
-use std::path::PathBuf;
+use std::{fs, path::PathBuf};
 
-use anyhow::anyhow;
+use anstream::println;
+use anstyle::{AnsiColor, Style};
+use anyhow::Context;
 use clap::Subcommand;
+use indicatif::ProgressBar;
+use tracing::{info, instrument};
 
 use crate::{
-    Commands, Generator, OptionalSubcommands,
+    Commands, DEFAULT_CONFIG_DIR, DOCS_DIR, Generator, OptionalSubcommands,
     commands::{
         cpp::Cpp,
         go::{Go, GoCommands},
-        javascript::{JSCommands, Javascript},
+        javascript::{JSCommands, JavaScript},
         kotlin::{KTCommands, Kotlin},
         python::Python,
         rust::Rust,
     },
+    config_dir,
 };
 
 mod cpp;
@@ -24,14 +29,25 @@ mod rust;
 
 #[derive(Subcommand)]
 pub enum RootCommands {
+    /// Generate C++ projects.
     Cpp,
+
+    /// Generate Go projects.
     Go(OptionalSubcommands<GoCommands>),
+
+    /// Generate JavaScript projects.
     #[command(alias = "js")]
-    Javascript(OptionalSubcommands<JSCommands>),
+    JavaScript(OptionalSubcommands<JSCommands>),
+
+    /// Generate Kotlin projects.
     #[command(alias = "kt")]
     Kotlin(OptionalSubcommands<KTCommands>),
+
+    /// Generate Python projects.
     #[command(alias = "py")]
     Python,
+
+    /// Generate Rust projects.
     #[command(alias = "rs")]
     Rust,
 }
@@ -44,9 +60,9 @@ impl Commands for RootCommands {
                 Some(c) => c.generator(),
                 None => Box::new(Go::default()),
             },
-            RootCommands::Javascript(optional_subcommands) => match optional_subcommands.command {
+            RootCommands::JavaScript(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(Javascript::default()),
+                None => Box::new(JavaScript::default()),
             },
             RootCommands::Kotlin(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
@@ -58,12 +74,68 @@ impl Commands for RootCommands {
     }
 }
 
+/// Root generator
+///
+/// Generator returns an error.
 #[derive(Default, Debug)]
-pub struct Root {}
+pub struct Root;
 
 impl Generator for Root {
+    #[instrument]
     fn generate(&self, _name: String) -> anyhow::Result<()> {
-        Err(anyhow!("Select a generator."))
+        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
+        let strong_style = Style::new().bold();
+
+        let bar = ProgressBar::new(4);
+
+        info!("Generating config directory.");
+
+        let config_dir = config_dir();
+
+        println!(
+            "{msg_style}Generating config directory in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
+            config_dir.display()
+        );
+        info!("Creating config directory");
+        info!(path = config_dir.to_str());
+
+        fs::create_dir_all(&config_dir).context("Failed to create config directory.")?;
+        bar.inc(1);
+
+        info!("Done");
+        info!("Generating config files");
+
+        DEFAULT_CONFIG_DIR
+            .extract(&config_dir)
+            .context("Failed to generate config files.")?;
+
+        bar.inc(1);
+
+        info!("Done");
+        info!("Creating documentation directory");
+
+        let docs_dir = config_dir.join("docs");
+
+        info!(path = docs_dir.to_str());
+
+        fs::create_dir_all(&docs_dir)?;
+        bar.inc(1);
+
+        info!("Done");
+        info!("Generating documentation files.");
+
+        DOCS_DIR
+            .extract(&docs_dir)
+            .context("Failed to generate documentation files")?;
+
+        bar.inc(1);
+
+        info!("Done");
+        info!("Done generating config directory.");
+
+        bar.finish_and_clear();
+
+        Ok(())
     }
 
     fn docs_path(&self) -> PathBuf {

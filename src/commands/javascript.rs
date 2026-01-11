@@ -16,8 +16,11 @@ mod tauri;
 
 #[derive(Subcommand)]
 pub enum JSCommands {
+    /// Generate NextJS projects.
     #[command(alias = "next")]
     NextJS,
+
+    /// Generate Tauri projects.
     Tauri(OptionalSubcommands<TauriCommands>),
 }
 
@@ -33,10 +36,11 @@ impl Commands for JSCommands {
     }
 }
 
+/// JavaScript generator
 #[derive(Default)]
-pub struct Javascript {}
+pub(super) struct JavaScript;
 
-impl Generator for Javascript {
+impl Generator for JavaScript {
     fn generate(&self, name: String) -> anyhow::Result<()> {
         todo!()
     }
