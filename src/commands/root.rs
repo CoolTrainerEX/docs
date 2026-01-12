@@ -91,7 +91,7 @@ impl Generator for Root {
             config_dir.display()
         );
         info!("Creating config directory");
-        info!(path = config_dir.to_str());
+        info!(dir = config_dir.to_str());
 
         fs::create_dir_all(&config_dir).context("Failed to create config directory.")?;
         bar.inc(1);
@@ -110,7 +110,7 @@ impl Generator for Root {
 
         let docs_dir = config_dir.join("docs");
 
-        info!(path = docs_dir.to_str());
+        info!(dir = docs_dir.to_str());
 
         fs::create_dir_all(&docs_dir)?;
         bar.inc(1);

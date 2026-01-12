@@ -336,6 +336,7 @@ dependencies = [
  "open",
  "predicates",
  "serde",
+ "serde_json",
  "thiserror",
  "tracing",
  "tracing-appender",

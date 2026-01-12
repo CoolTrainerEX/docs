@@ -3,12 +3,24 @@ use std::{ffi::OsStr, iter, process::Command};
 use anstyle::Style;
 use anyhow::{Context, Result, anyhow};
 use clap::{Args, Subcommand};
+use serde::Deserialize;
 
 /// Subcommands wrapped with [`Option`]
 #[derive(Args)]
 pub struct OptionalSubcommands<T: Subcommand> {
+    /// Optional command.
     #[command(subcommand)]
     pub command: Option<T>,
+}
+
+/// `deps.json` structure in documentation.
+#[derive(Deserialize)]
+pub(super) struct Deps {
+    /// List of dependencies.
+    deps: Vec<String>,
+
+    /// List of dev dependencies.
+    dev: Vec<String>,
 }
 
 /// Helper function to run commands.
