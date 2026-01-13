@@ -80,7 +80,6 @@ impl Generator for JavaScript {
         info!(dir = proj_dir.to_str());
 
         install_js_deps()?;
-
         bar.inc(1);
 
         info!("Done.");

@@ -68,9 +68,4 @@ mod tests {
             config_dir().join("config").with_extension("toml")
         );
     }
-
-    #[test]
-    fn test_config_dir_exists_or_gen() {
-        todo!();
-    }
 }

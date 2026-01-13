@@ -5,10 +5,13 @@ use anyhow::Context;
 use indicatif::ProgressBar;
 use tracing::info;
 
-use crate::commands::{
-    Generator,
-    javascript::{JavaScript, install_js_deps},
-    utils::execute_command,
+use crate::{
+    DOCS_DIR,
+    commands::{
+        Generator,
+        javascript::{JavaScript, install_js_deps},
+        utils::{Deps, execute_command, extract_files},
+    },
 };
 
 /// NextJS generator
@@ -18,31 +21,80 @@ impl Generator for NextJS {
     fn generate(&self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(3);
+        let bar = ProgressBar::new(4);
 
-        info!("Generating JavaScript project.");
+        info!("Generating NextJS project.");
 
         let current_dir = env::current_dir().context("Failed to get current directory")?;
         let proj_dir = current_dir.join(&name);
 
         println!(
-            "{msg_style}Generating JavaScript project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
+            "{msg_style}Generating NextJS project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
             proj_dir.display()
         );
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("deno").args(["x", "shadcn", "init"]))?;
+        execute_command(Command::new("deno").args(["init", "--npm", "next-app", &name]))?;
         bar.inc(1);
 
         info!("Done.");
-        info!("Installing dependencies");
+        info!("Running init commands.");
 
         env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
 
         info!(dir = proj_dir.to_str());
 
+        execute_command(Command::new("deno").args(["x", "shadcn", "init"]))?;
+        execute_command(Command::new("deno").args(["init", "--npm", "playwright"]))?;
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Installing dependencies");
+
         install_js_deps()?;
+
+        let deps: Deps = serde_json::from_slice(
+            DOCS_DIR
+                .get_file(self.docs_path().join("deps").with_extension("json"))
+                .context(format!(
+                    "Cannot find {strong_style}deps.json{strong_style:#}."
+                ))?
+                .contents(),
+        )
+        .context(format!(
+            "Failed to parse {strong_style}deps.json{strong_style:#}."
+        ))?;
+
+        if let Some(deps) = deps.deps {
+            execute_command(
+                Command::new("deno")
+                    .arg("add")
+                    .args(deps)
+                    .arg("--allow-scripts"),
+            )?;
+        }
+
+        if let Some(dev) = deps.dev {
+            execute_command(
+                Command::new("deno")
+                    .arg("add")
+                    .args(dev)
+                    .args(["--allow-scripts", "-D"]),
+            )?;
+        }
+
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Creating files.");
+
+        extract_files(
+            DOCS_DIR
+                .get_dir(self.docs_path().join("create"))
+                .context("Cannot find create directory.")?,
+            &proj_dir,
+        )?;
 
         bar.inc(1);
 

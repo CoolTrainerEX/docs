@@ -1,7 +1,8 @@
 {
     "dev": [
         "npm:vitest",
-        "npm:@vitejs/plugin-react jsdom",
+        "npm:@vitejs/plugin-react",
+        "npm:jsdom",
         "npm:@testing-library/react",
         "npm:@testing-library/dom",
         "npm:vite-tsconfig-paths"

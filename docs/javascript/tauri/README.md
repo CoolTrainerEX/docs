@@ -11,7 +11,6 @@ Tauri is used to make GUI apps.
 ```sh
 deno init --npm tauri-app <name>
 cd <name>
-deno install
 ```
 
 ### Run

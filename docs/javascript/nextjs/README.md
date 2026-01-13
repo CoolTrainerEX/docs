@@ -10,7 +10,6 @@ NextJS is used to make frontend websites.
 deno x shadcn init
 cd <name>
 deno init --npm playwright
-deno install --allow-scripts
 ```
 
 Might need to run in a subdirectory if the current directory contains
