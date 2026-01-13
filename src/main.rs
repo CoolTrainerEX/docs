@@ -73,7 +73,7 @@ fn main() -> Result<()> {
 
     let mut is_root = false;
 
-    let generator = match args.command.command {
+    let mut generator = match args.command.command {
         Some(s) => match s {
             Subcommands::Generate(root_commands) => root_commands.generator(),
             Subcommands::Upgrade => {

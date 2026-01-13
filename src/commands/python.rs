@@ -21,7 +21,7 @@ pub(super) struct Python;
 
 impl Generator for Python {
     #[instrument]
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(4);

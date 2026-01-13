@@ -30,7 +30,7 @@ pub(super) trait Upgrade {
 fn upgrades() -> Vec<Box<dyn Upgrade>> {
     vec![
         Box::new(Cpp),
-        Box::new(Go),
+        Box::new(Go::default()),
         Box::new(Gin),
         Box::new(JavaScript),
         Box::new(Fabric),

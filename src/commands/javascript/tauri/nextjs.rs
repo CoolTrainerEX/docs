@@ -20,7 +20,7 @@ pub(super) struct NextJS;
 
 impl Generator for NextJS {
     #[instrument]
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(3);
@@ -80,7 +80,7 @@ impl Generator for NextJS {
         bar.inc(1);
 
         info!("Done.");
-        info!("Running init command.");
+        info!("Running init commands.");
 
         execute_command(Command::new("deno").args(["x", "tauri", "init"]))?;
         bar.inc(1);

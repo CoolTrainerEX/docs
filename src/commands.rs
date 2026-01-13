@@ -33,7 +33,7 @@ pub trait Generator {
     ///
     /// # Returns
     /// Process [`Result`]
-    fn generate(&self, name: String) -> Result<()>;
+    fn generate(&mut self, name: String) -> Result<()>;
 
     /// Returns the relative documentation path
     ///

@@ -53,7 +53,7 @@ impl Commands for RootCommands {
             RootCommands::Cpp => Box::new(Cpp),
             RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
-                None => Box::new(Go),
+                None => Box::new(Go::default()),
             },
             RootCommands::JavaScript(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
@@ -77,7 +77,7 @@ pub struct Root;
 
 impl Generator for Root {
     #[instrument]
-    fn generate(&self, _name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, _name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(4);

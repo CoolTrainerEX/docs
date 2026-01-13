@@ -18,7 +18,7 @@ pub(super) struct Rust;
 
 impl Generator for Rust {
     #[instrument]
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(2);

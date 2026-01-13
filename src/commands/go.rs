@@ -36,11 +36,13 @@ impl Commands for GoCommands {
 }
 
 /// Go generator
-#[derive(Debug)]
-pub(super) struct Go;
+#[derive(Debug, Default)]
+pub(super) struct Go {
+    username: String,
+}
 
 impl Generator for Go {
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
         let bar = ProgressBar::new(3);
@@ -61,18 +63,17 @@ impl Generator for Go {
 
         info!(dir = proj_dir.to_str());
 
+        self.username = Input::with_theme(&ColorfulTheme::default())
+            .with_prompt("User name")
+            .interact_text()
+            .context("Input error.")?;
+
         execute_command(Command::new("go").args([
             "mod",
             "init",
-            &format!(
-                    "github.com/{}/{}",
-                    Input::<String>::with_theme(&ColorfulTheme::default())
-                        .with_prompt("User name")
-                        .interact_text()
-                        .context("Input error.")?,
-                    &name
-                ),
+            &format!("github.com/{}/{}", self.username, &name),
         ]))?;
+
         bar.inc(1);
 
         info!("Done.");

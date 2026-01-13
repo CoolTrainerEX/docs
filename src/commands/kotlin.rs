@@ -25,7 +25,7 @@ impl Commands for KTCommands {
 pub(super) struct Kotlin;
 
 impl Generator for Kotlin {
-    fn generate(&self, _name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, _name: String) -> anyhow::Result<()> {
         Err(anyhow!("Kotlin generator not implemented."))
     }
 

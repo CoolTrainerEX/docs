@@ -11,7 +11,7 @@ use crate::commands::{Generator, root::Root, upgrade::Upgrade, utils::execute_co
 pub(super) struct Cpp;
 
 impl Generator for Cpp {
-    fn generate(&self, name: String) -> anyhow::Result<()> {
+    fn generate(&mut self, name: String) -> anyhow::Result<()> {
         todo!()
     }
 
