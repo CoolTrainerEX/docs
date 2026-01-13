@@ -7,18 +7,8 @@ description = "Docs for my personal programming paradigms."
 homepage = "https://CoolTrainerEX.github.io/docs"
 repository = "https://github.com/CoolTrainerEX/docs"
 license = "MIT"
-keywords = [
-    "cpp",
-    "go",
-    "javascript",
-    "nextjs",
-    "tauri",
-    "kotlin",
-    "fabric",
-    "python",
-    "rust",
-]
-categories = ["development-tools"]
+keywords = ["docs", "generator", "init", "upgrade"]
+categories = ["command-line-utilities", "development-tools"]
 
 
 [dependencies]
