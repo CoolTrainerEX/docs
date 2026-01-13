@@ -1,4 +1,4 @@
-use std::{env, ffi::OsStr, iter, path::PathBuf, process::Command};
+use std::{env, ffi::OsStr, iter, process::Command};
 
 use anstream::println;
 use anstyle::{AnsiColor, Style};
@@ -38,7 +38,7 @@ impl Generator for Rust {
         execute_command(Command::new("cargo").args(["new", &name]))?;
         bar.inc(1);
 
-        info!("Done");
+        info!("Done.");
         info!("Installing dependencies");
 
         env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
@@ -47,7 +47,7 @@ impl Generator for Rust {
 
         let deps: RustDeps = serde_json::from_slice(
             DOCS_DIR
-                .get_file(PathBuf::from("rust").join("deps").with_extension("json"))
+                .get_file(self.docs_path().join("deps").with_extension("json"))
                 .context(format!(
                     "Cannot find {strong_style}deps.json{strong_style:#}."
                 ))?
@@ -57,22 +57,22 @@ impl Generator for Rust {
             "Failed to parse {strong_style}deps.json{strong_style:#}."
         ))?;
 
-        execute_command(
-            Command::new("cargo")
-                .arg("add")
-                .args(parse_deps(&deps.deps)),
-        )?;
+        if let Some(deps) = deps.deps {
+            execute_command(Command::new("cargo").arg("add").args(parse_deps(&deps)))?;
+        }
 
-        execute_command(
-            Command::new("cargo")
-                .arg("add")
-                .args(parse_deps(&deps.dev))
-                .arg("--dev"),
-        )?;
+        if let Some(dev) = deps.dev {
+            execute_command(
+                Command::new("cargo")
+                    .arg("add")
+                    .args(parse_deps(&dev))
+                    .arg("--dev"),
+            )?;
+        }
 
         bar.inc(1);
 
-        info!("Done");
+        info!("Done.");
         info!("Done generating project.");
 
         bar.finish_and_clear();
@@ -97,10 +97,10 @@ enum DepEntry {
 #[derive(Deserialize)]
 struct RustDeps {
     /// List of dependencies.
-    deps: Vec<DepEntry>,
+    deps: Option<Vec<DepEntry>>,
 
     /// List of dev dependencies.
-    dev: Vec<DepEntry>,
+    dev: Option<Vec<DepEntry>>,
 }
 
 fn parse_deps(deps: &[DepEntry]) -> impl IntoIterator<Item = impl AsRef<OsStr>> {

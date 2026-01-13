@@ -90,14 +90,14 @@ impl Generator for Root {
             "{msg_style}Generating config directory in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
             config_dir.display()
         );
-        info!("Creating config directory");
+        info!("Creating config directory.");
         info!(dir = config_dir.to_str());
 
         fs::create_dir_all(&config_dir).context("Failed to create config directory.")?;
         bar.inc(1);
 
-        info!("Done");
-        info!("Generating config files");
+        info!("Done.");
+        info!("Generating config files.");
 
         DEFAULT_CONFIG_DIR
             .extract(&config_dir)
@@ -105,8 +105,8 @@ impl Generator for Root {
 
         bar.inc(1);
 
-        info!("Done");
-        info!("Creating documentation directory");
+        info!("Done.");
+        info!("Creating documentation directory.");
 
         let docs_dir = config_dir.join("docs");
 
@@ -115,16 +115,16 @@ impl Generator for Root {
         fs::create_dir_all(&docs_dir)?;
         bar.inc(1);
 
-        info!("Done");
+        info!("Done.");
         info!("Generating documentation files.");
 
         DOCS_DIR
             .extract(&docs_dir)
-            .context("Failed to generate documentation files")?;
+            .context("Failed to generate documentation files.")?;
 
         bar.inc(1);
 
-        info!("Done");
+        info!("Done.");
         info!("Done generating config directory.");
 
         bar.finish_and_clear();
@@ -133,6 +133,6 @@ impl Generator for Root {
     }
 
     fn docs_path(&self) -> PathBuf {
-        PathBuf::from(".")
+        PathBuf::from("")
     }
 }
