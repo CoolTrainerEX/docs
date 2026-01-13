@@ -117,7 +117,6 @@ impl Upgrade for JavaScript {
 ///
 /// # Returns
 /// Process [`Result`]
-#[instrument]
 fn install_js_deps() -> Result<()> {
     let strong_style = Style::new().bold();
 
