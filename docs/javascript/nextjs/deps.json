@@ -5,6 +5,7 @@
         "npm:jsdom",
         "npm:@testing-library/react",
         "npm:@testing-library/dom",
-        "npm:vite-tsconfig-paths"
+        "npm:vite-tsconfig-paths",
+        "npm:next-themes"
     ]
 }

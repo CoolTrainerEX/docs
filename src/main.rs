@@ -1,4 +1,7 @@
-use std::path::{Path, PathBuf};
+use std::{
+    env,
+    path::{Path, PathBuf},
+};
 
 use anstyle::Style;
 use anyhow::{Context, Result};
@@ -95,6 +98,7 @@ fn main() -> Result<()> {
         )
         .context("Failed to open documentation.")
     } else if args.local {
+        env::set_current_dir(config_dir()).context("Failed to set working directory.")?;
         open::that(
             Path::new(&config.path.context(format!(
                 "Config missing {strong_style}path{strong_style:#} value"
