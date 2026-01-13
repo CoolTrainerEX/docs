@@ -1,4 +1,4 @@
-use std::{env, path::PathBuf, process::Command};
+use std::{env, path::Path, process::Command};
 
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
@@ -74,12 +74,8 @@ impl Generator for Python {
         info!("Running documentation init command.");
 
         execute_command(
-            Command::new(
-                PathBuf::from(".venv")
-                    .join("Scripts")
-                    .join("sphinx-quickstart"),
-            )
-            .args(["./docs/", "--ext-autodoc"]),
+            Command::new(Path::new(".venv").join("Scripts").join("sphinx-quickstart"))
+                .args(["./docs/", "--ext-autodoc"]),
         )?;
 
         bar.inc(1);

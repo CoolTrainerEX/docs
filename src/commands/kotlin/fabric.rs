@@ -1,4 +1,4 @@
-use std::{env, path::PathBuf, process::Command};
+use std::{env, path::Path, process::Command};
 
 use anstream::println;
 use anstyle::{AnsiColor, Style};
@@ -41,7 +41,7 @@ impl Generator for Fabric {
 
         info!(dir = proj_dir.to_str());
 
-        let gradlew_path = PathBuf::from(".").join("gradlew");
+        let gradlew_path = Path::new(".").join("gradlew");
 
         execute_command(Command::new(&gradlew_path).arg("vscode"))?;
         execute_command(Command::new(&gradlew_path).arg("genSources"))?;

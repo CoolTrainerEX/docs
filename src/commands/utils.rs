@@ -93,3 +93,31 @@ fn extract_files_root(dir: &Dir, base_path: impl AsRef<Path>, root: &Path) -> Re
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use assert_fs::{TempDir, assert::PathAssert, prelude::PathChild};
+    use include_dir::include_dir;
+    use predicates::path;
+
+    use super::*;
+
+    #[test]
+    fn test_extract_files() -> Result<()> {
+        let temp = TempDir::new().context("Failed to generate temp directory.")?;
+        let dir = include_dir!("test")
+            .get_dir("test_dir")
+            .context("Failed to get test directory.")?;
+
+        extract_files(dir, &temp)?;
+
+        temp.child(Path::new("test1").with_extension("txt"))
+            .assert("test1");
+        temp.child(Path::new("dir").join("test2").with_extension("txt"))
+            .assert("test2");
+        temp.child(Path::new("test3").with_extension("txt"))
+            .assert(path::missing());
+
+        temp.close().context("Failed to close temp directory.")
+    }
+}

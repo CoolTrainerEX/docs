@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use anstyle::Style;
 use anyhow::{Context, Result};
@@ -88,7 +88,7 @@ fn main() -> Result<()> {
 
     if args.docs {
         open::that(
-            PathBuf::from(config.url.context(format!(
+            Path::new(&config.url.context(format!(
                 "Config missing {strong_style}url{strong_style:#} value"
             ))?)
             .join(generator.docs_path()),
@@ -96,7 +96,7 @@ fn main() -> Result<()> {
         .context("Failed to open documentation.")
     } else if args.local {
         open::that(
-            PathBuf::from(config.path.context(format!(
+            Path::new(&config.path.context(format!(
                 "Config missing {strong_style}path{strong_style:#} value"
             ))?)
             .join(generator.docs_path())
