@@ -19,14 +19,14 @@ pub(super) trait Upgrade {
     /// Run upgrade commands.
     ///
     /// # Returns
-    /// - Process [`Result`]
+    /// Process [`Result`]
     fn upgrade(&self) -> Result<()>;
 }
 
 /// Returns a list of [`Upgrade`] to run.
 ///
 /// # Returns
-/// - List of [`Upgrade`]
+/// List of [`Upgrade`]
 fn upgrades() -> Vec<Box<dyn Upgrade>> {
     vec![
         Box::new(Cpp),
@@ -41,7 +41,7 @@ fn upgrades() -> Vec<Box<dyn Upgrade>> {
 /// Run upgrade commands. Uses [Scoop](https://scoop.sh/).
 ///
 /// # Returns
-/// - Process [`Result`]
+/// Process [`Result`]
 #[instrument]
 pub fn upgrade() -> Result<()> {
     let upgrades = upgrades();

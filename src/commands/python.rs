@@ -3,7 +3,7 @@ use std::{env, path::PathBuf, process::Command};
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
 use indicatif::ProgressBar;
-use tracing::info;
+use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
@@ -16,9 +16,11 @@ use crate::{
 };
 
 /// Python generator
+#[derive(Debug)]
 pub(super) struct Python;
 
 impl Generator for Python {
+    #[instrument]
     fn generate(&self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();

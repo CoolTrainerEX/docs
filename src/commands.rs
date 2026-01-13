@@ -20,7 +20,7 @@ pub trait Commands {
     /// Gets the generator for the command to execute.
     ///
     /// # Returns
-    /// - The generator function
+    /// The generator function
     fn generator(self) -> Box<dyn Generator>;
 }
 
@@ -32,13 +32,13 @@ pub trait Generator {
     /// - `name` - Name value
     ///
     /// # Returns
-    /// - Process [`Result`]
+    /// Process [`Result`]
     fn generate(&self, name: String) -> Result<()>;
 
     /// Returns the relative documentation path
     ///
     /// # Returns
-    /// - Documentation path
+    /// Documentation path
     fn docs_path(&self) -> PathBuf;
 }
 

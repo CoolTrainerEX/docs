@@ -57,7 +57,7 @@ pub(super) fn execute_command(command: &mut Command) -> Result<()> {
 /// - `base_path` - Path to extract to
 ///
 /// # Returns
-/// - Process [`Result`]
+/// Process [`Result`]
 pub(super) fn extract_files(dir: &Dir, base_path: impl AsRef<Path>) -> Result<()> {
     extract_files_root(dir, base_path, dir.path())
 }
@@ -70,7 +70,7 @@ pub(super) fn extract_files(dir: &Dir, base_path: impl AsRef<Path>) -> Result<()
 /// - `root` - Root [`Dir`] path
 ///
 /// # Returns
-/// - Process [`Result`]
+/// Process [`Result`]
 fn extract_files_root(dir: &Dir, base_path: impl AsRef<Path>, root: &Path) -> Result<()> {
     for entry in dir.entries() {
         match entry {

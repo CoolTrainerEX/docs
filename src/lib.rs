@@ -15,7 +15,7 @@ const DOCS_DIR: include_dir::Dir<'_> = include_dir!("docs");
 /// Gets the application config directory.
 ///
 /// # Returns
-/// - The config directory
+/// The config directory
 pub fn config_dir() -> PathBuf {
     env::home_dir().unwrap_or(PathBuf::from("/")).join(".docs")
 }
@@ -23,7 +23,7 @@ pub fn config_dir() -> PathBuf {
 /// Returns the path to the default config file.
 ///
 /// # Returns
-/// - Path to the default config file
+/// Path to the default config file
 pub fn default_config() -> PathBuf {
     config_dir().join("config").with_extension("toml")
 }
@@ -31,7 +31,7 @@ pub fn default_config() -> PathBuf {
 /// Checks if [`config_dir`] exists. Uses existence of [`default_config`] to check.
 ///
 /// # Returns
-/// - Process [`Result`]
+/// Process [`Result`]
 #[instrument]
 pub fn config_dir_exists_or_gen() -> Result<()> {
     let error_style = Style::new().fg_color(Some(AnsiColor::Red.into())).bold();

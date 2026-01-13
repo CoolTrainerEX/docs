@@ -103,6 +103,13 @@ struct RustDeps {
     dev: Option<Vec<DepEntry>>,
 }
 
+/// Parses Rust [`DepEntry`].
+///
+/// # Parameters
+/// - `deps` - List of [`DepEntry`]
+///
+/// # Returns
+/// List of args
 fn parse_deps(deps: &[DepEntry]) -> impl IntoIterator<Item = impl AsRef<OsStr>> {
     deps.iter().flat_map(|dep| match dep {
         DepEntry::Dep(name) => vec![name.to_owned()],

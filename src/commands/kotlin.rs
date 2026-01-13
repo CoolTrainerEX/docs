@@ -1,3 +1,4 @@
+use anyhow::anyhow;
 use clap::Subcommand;
 
 use crate::commands::{Commands, Generator, kotlin::fabric::Fabric, root::Root};
@@ -24,8 +25,8 @@ impl Commands for KTCommands {
 pub(super) struct Kotlin;
 
 impl Generator for Kotlin {
-    fn generate(&self, name: String) -> anyhow::Result<()> {
-        todo!()
+    fn generate(&self, _name: String) -> anyhow::Result<()> {
+        Err(anyhow!("Kotlin generator not implemented."))
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
