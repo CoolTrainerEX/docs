@@ -1,8 +1,5 @@
 {
     "deps": [
         "gtest"
-    ],
-    "dev": [
-        "doxygen"
     ]
 }

@@ -5,7 +5,7 @@ use anstyle::{AnsiColor, Style};
 use anyhow::Context;
 use dialoguer::{Input, theme::ColorfulTheme};
 use indicatif::ProgressBar;
-use tracing::info;
+use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
@@ -22,6 +22,7 @@ use crate::{
 pub(crate) struct Gin;
 
 impl Generator for Gin {
+    #[instrument]
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();

@@ -3,7 +3,7 @@ use std::{env, process::Command};
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
 use indicatif::ProgressBar;
-use tracing::info;
+use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
@@ -15,9 +15,11 @@ use crate::{
 };
 
 /// NextJS generator
+#[derive(Debug)]
 pub(super) struct NextJS;
 
 impl Generator for NextJS {
+    #[instrument]
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();

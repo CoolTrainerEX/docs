@@ -81,6 +81,7 @@ impl Generator for Python {
             )
             .args(["./docs/", "--ext-autodoc"]),
         )?;
+
         bar.inc(1);
 
         info!("Done.");

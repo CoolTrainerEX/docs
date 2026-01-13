@@ -6,7 +6,7 @@ use anyhow::Context;
 use clap::Subcommand;
 use dialoguer::{Input, theme::ColorfulTheme};
 use indicatif::ProgressBar;
-use tracing::info;
+use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
@@ -42,6 +42,7 @@ pub(super) struct Go {
 }
 
 impl Generator for Go {
+    #[instrument]
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
