@@ -1,5 +1,12 @@
 {
+    "deps": [
+        "npm:zustand",
+        "npm:@tanstack/react-query",
+        "jsr:@zod/zod"
+    ],
     "dev": [
+        "npm:@tanstack/react-query-devtools",
+        "npm:orval",
         "npm:vitest",
         "npm:@vitejs/plugin-react",
         "npm:jsdom",
