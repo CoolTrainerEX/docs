@@ -24,7 +24,10 @@ so just use [manual setup](https://nextjs.org/docs/app/guides/testing/vitest).
 
 #### Create
 
+- [`orval.config.ts`](create/orval.config.ts)
 - [`vite.config.mts`](create/vite.config.ts)
+- [`app/providers.tsx`](create/app/providers.tsx)
+- [`.vscode/launch.json`](create/.vscode/launch.json)
 
 #### Edit
 

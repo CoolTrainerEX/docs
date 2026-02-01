@@ -36,12 +36,22 @@ function getQueryClient() {
   }
 }
 
-export default function Providers({ children }: Readonly<{ children: React.ReactNode }>) {
+// This code is only for TypeScript
+declare global {
+  var __TANSTACK_QUERY_CLIENT__: QueryClient;
+}
+
+export default function Providers(
+  { children }: Readonly<{ children: React.ReactNode }>,
+) {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
   //       suspend because React will throw away the client on the initial
   //       render if it suspends and there is no boundary
   const queryClient = getQueryClient();
+
+  // This code is for all users
+  globalThis.__TANSTACK_QUERY_CLIENT__ = queryClient;
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

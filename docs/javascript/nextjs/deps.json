@@ -5,7 +5,6 @@
         "jsr:@zod/zod"
     ],
     "dev": [
-        "npm:@tanstack/react-query-devtools",
         "npm:orval",
         "npm:vitest",
         "npm:@vitejs/plugin-react",

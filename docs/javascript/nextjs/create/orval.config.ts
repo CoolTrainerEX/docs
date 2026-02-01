@@ -2,7 +2,7 @@ import { defineConfig } from "orval";
 
 export default defineConfig({
   // HTTP client generation
-  petstore: {
+  openapi: {
     input: {
       target: "./openapi.yaml",
     },
@@ -15,7 +15,7 @@ export default defineConfig({
     },
   },
   // Zod schema generation
-  petstoreZod: {
+  openapiZod: {
     input: {
       target: "./openapi.yaml",
     },
