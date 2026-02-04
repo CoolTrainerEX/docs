@@ -2,7 +2,7 @@
     "deps": [
         "npm:zustand",
         "npm:@tanstack/react-query",
-        "jsr:@zod/zod"
+        "npm:zod"
     ],
     "dev": [
         "npm:orval",
