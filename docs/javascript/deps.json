@@ -7,7 +7,6 @@
         "prettier",
         "eslint-plugin-prettier",
         "eslint-config-prettier",
-        "prettier-plugin-tailwindcss",
-        "prettier-plugin-jsdoc"
+        "prettier-plugin-tailwindcss"
     ]
 }
