@@ -9,12 +9,12 @@ use crate::{
     DOCS_DIR,
     commands::{
         Generator,
-        javascript::{JavaScript, install_js_deps},
-        utils::{Deps, execute_command, extract_files},
+        javascript::{self, tauri::Tauri},
+        utils::{Deps, execute_command},
     },
 };
 
-/// NextJS generator
+/// Tauri NextJS generator
 #[derive(Debug)]
 pub(super) struct NextJS;
 
@@ -23,38 +23,29 @@ impl Generator for NextJS {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(4);
+        let bar = ProgressBar::new(3);
 
-        info!("Generating NextJS project.");
+        info!("Generating Tauri NextJS project.");
 
         let current_dir = env::current_dir().context("Failed to get current directory")?;
         let proj_dir = current_dir.join(&name);
 
         println!(
-            "{msg_style}Generating NextJS project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
+            "{msg_style}Generating Tauri NextJS project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
             proj_dir.display()
         );
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("bun").args(["create", "next-app", &name]))?;
-        bar.inc(1);
-
-        info!("Done.");
-        info!("Running init commands.");
-
-        env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
-
-        info!(dir = proj_dir.to_str());
-
-        execute_command(Command::new("bunx").args(["shadcn", "init"]))?;
-        execute_command(Command::new("bun").args(["create", "playwright"]))?;
+        javascript::NextJS.generate(name)?;
         bar.inc(1);
 
         info!("Done.");
         info!("Installing dependencies");
 
-        install_js_deps()?;
+        env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
+
+        info!(dir = proj_dir.to_str());
 
         let deps: Deps = serde_json::from_slice(
             DOCS_DIR
@@ -79,15 +70,9 @@ impl Generator for NextJS {
         bar.inc(1);
 
         info!("Done.");
-        info!("Creating files.");
+        info!("Running init commands.");
 
-        extract_files(
-            DOCS_DIR
-                .get_dir(self.docs_path().join("create"))
-                .context("Cannot find create directory.")?,
-            &proj_dir,
-        )?;
-
+        execute_command(Command::new("bun").args(["run", "tauri", "init"]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -99,6 +84,6 @@ impl Generator for NextJS {
     }
 
     fn docs_path(&self) -> std::path::PathBuf {
-        JavaScript.docs_path().join("nextjs")
+        Tauri.docs_path().join("nextjs")
     }
 }

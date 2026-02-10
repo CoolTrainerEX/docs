@@ -7,7 +7,7 @@ JavaScript is used for frontend web development.
 
 ## Installation
 
-Install [pnpm](https://pnpm.io/). For CSS Preprocessor, install [Sass](https://sass-lang.com/).
+Install [Bun](https://bun.com/).
 
 ## Usage
 
@@ -16,14 +16,20 @@ Install [pnpm](https://pnpm.io/). For CSS Preprocessor, install [Sass](https://s
 Follow individual initializations, or:
 
 ```sh
-npm init
+bun init <name>
+```
+
+#### continued
+
+```sh
+bun create @eslint/config
 ```
 
 #### Dependencies
 
 ```sh
-pnpm add <dep1> <dep2>
-pnpm add -D <dep3> <dep4> # dev dependencies
+bun add <dep1> <dep2>
+bun add -d <dep3> <dep4> # dev dependencies
 ```
 
 [Dependencies](deps.json)
@@ -39,6 +45,6 @@ deno doc
 After upgrading, run:
 
 ```sh
-pnpm update -g
-pnpm store prune
+bun update -g
+bun pm cache rm
 ```

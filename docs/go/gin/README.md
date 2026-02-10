@@ -4,10 +4,10 @@ Gin is a backend web framework for servers.
 
 ## Installation
 
-Install [pnpm](../../javascript//README.md) for [Redocly CLI](https://redocly.com/docs/cli)
+Install [bun](../../javascript//README.md) for [Redocly CLI](https://redocly.com/docs/cli)
 
 ```sh
-pnpm i -g @redocly/cli
+bun add -g @redocly/cli
 ```
 
 ## Usage

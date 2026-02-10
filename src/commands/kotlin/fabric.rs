@@ -70,6 +70,11 @@ impl Upgrade for Fabric {
         execute_command(Command::new("fabric.cmd").arg("upgrade"))?;
 
         info!("Done.");
+        info!("Clearing cache.");
+
+        execute_command(Command::new("deno").arg("clean"))?;
+
+        info!("Done.");
         info!("Done upgrading Fabric.");
 
         Ok(())

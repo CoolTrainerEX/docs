@@ -2,14 +2,32 @@ use std::{env, process::Command};
 
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
+use clap::Subcommand;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::commands::{
-    Generator,
-    javascript::{JavaScript, install_js_deps},
+    Commands, Generator,
+    javascript::{JavaScript, install_js_deps, tauri::nextjs::NextJS},
     utils::execute_command,
 };
+
+mod nextjs;
+
+#[derive(Subcommand)]
+pub enum TauriCommands {
+    /// Generate Tauri NextJS projects.
+    #[command(alias = "next")]
+    NextJS,
+}
+
+impl Commands for TauriCommands {
+    fn generator(self) -> Box<dyn Generator> {
+        match self {
+            TauriCommands::NextJS => Box::new(NextJS),
+        }
+    }
+}
 
 /// Tauri generator
 #[derive(Debug)]
@@ -34,7 +52,7 @@ impl Generator for Tauri {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("pnpm").args(["create", "tauri-app", &name]))?;
+        execute_command(Command::new("bun").args(["create", "tauri-app", &name]))?;
         bar.inc(1);
 
         info!("Done.");

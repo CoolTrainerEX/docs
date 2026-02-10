@@ -1,0 +1,8 @@
+{
+    "prettier": {
+        "plugins": [
+            "prettier-plugin-tailwindcss",
+            "prettier-plugin-jsdoc"
+        ]
+    }
+}

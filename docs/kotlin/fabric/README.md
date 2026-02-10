@@ -48,4 +48,5 @@ Run `vscode` and `genSources` Gradle task using [**VS Code Gradle for Java Exten
 
 ```sh
 fabric upgrade
+deno clean
 ```

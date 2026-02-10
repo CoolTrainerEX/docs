@@ -11,10 +11,13 @@ use crate::{
     DOCS_DIR,
     commands::{
         Commands, Generator,
-        javascript::{nextjs::NextJS, tauri::Tauri},
+        javascript::{
+            nextjs::NextJS,
+            tauri::{Tauri, TauriCommands},
+        },
         root::Root,
         upgrade::Upgrade,
-        utils::{Deps, execute_command},
+        utils::{Deps, OptionalSubcommands, execute_command},
     },
 };
 
@@ -28,14 +31,17 @@ pub enum JSCommands {
     NextJS,
 
     /// Generate Tauri projects.
-    Tauri,
+    Tauri(OptionalSubcommands<TauriCommands>),
 }
 
 impl Commands for JSCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
             JSCommands::NextJS => Box::new(NextJS),
-            JSCommands::Tauri => Box::new(Tauri),
+            JSCommands::Tauri(optional_subcommands) => match optional_subcommands.command {
+                Some(c) => c.generator(),
+                None => Box::new(Tauri),
+            },
         }
     }
 }
@@ -63,7 +69,7 @@ impl Generator for JavaScript {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("npm").arg("init"))?;
+        execute_command(Command::new("bun").args(["init", &name]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -98,12 +104,12 @@ impl Upgrade for JavaScript {
 
         info!("Upgrading global tools.");
 
-        execute_command(Command::new("pnpm").args(["update", "-g"]))?;
+        execute_command(Command::new("bun").args(["update", "-g"]))?;
 
         info!("Done.");
         info!("Clearing cache.");
 
-        execute_command(Command::new("pnpm").args(["store", "prune"]))?;
+        execute_command(Command::new("bun").args(["pm", "cache", "rm"]))?;
 
         info!("Done.");
         info!("Done upgrading JavaScript.");
@@ -119,6 +125,8 @@ impl Upgrade for JavaScript {
 fn install_js_deps() -> Result<()> {
     let strong_style = Style::new().bold();
 
+    execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
+
     let deps: Deps = serde_json::from_slice(
         DOCS_DIR
             .get_file(JavaScript.docs_path().join("deps").with_extension("json"))
@@ -132,11 +140,11 @@ fn install_js_deps() -> Result<()> {
     ))?;
 
     if let Some(deps) = deps.deps {
-        execute_command(Command::new("pnpm").arg("add").args(deps))?;
+        execute_command(Command::new("bun").arg("add").args(deps))?;
     }
 
     if let Some(dev) = deps.dev {
-        execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
+        execute_command(Command::new("bun").args(["add", "-d"]).args(dev))?;
     }
 
     Ok(())

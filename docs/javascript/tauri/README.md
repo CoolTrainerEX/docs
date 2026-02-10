@@ -9,14 +9,13 @@ Tauri is used to make GUI apps.
 ### Initialization
 
 ```sh
-pnpm create tauri-app <name>
-cd <name>
+bun create tauri-app <name>
 ```
 
 ### Run
 
 ```sh
-pnpm tauri dev
+bun run tauri dev
 ```
 
 ### Build
@@ -24,5 +23,5 @@ pnpm tauri dev
 **GitHub Actions**, or:
 
 ```sh
-pnpm tauri build
+bun run tauri build
 ```
