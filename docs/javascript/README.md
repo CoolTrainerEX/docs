@@ -17,11 +17,7 @@ Follow individual initializations, or:
 
 ```sh
 bun init <name>
-```
-
-#### continued
-
-```sh
+cd <name>
 bun create @eslint/config
 ```
 
@@ -33,6 +29,11 @@ bun add -d <dep3> <dep4> # dev dependencies
 ```
 
 [Dependencies](deps.json)
+
+#### Edit
+
+- [`eslint.config.ts`](edit/eslint.config.ts)
+- [`package.json`](edit/package.json)
 
 ## Docs
 

@@ -10,6 +10,8 @@ Tauri is used to make GUI apps.
 
 ```sh
 bun create tauri-app <name>
+cd <name>
+bun create @eslint/config
 ```
 
 ### Run

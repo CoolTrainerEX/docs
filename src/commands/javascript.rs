@@ -8,17 +8,17 @@ use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::{
-    DOCS_DIR,
     commands::{
-        Commands, Generator,
         javascript::{
             nextjs::NextJS,
             tauri::{Tauri, TauriCommands},
         },
         root::Root,
         upgrade::Upgrade,
-        utils::{Deps, OptionalSubcommands, execute_command},
+        utils::{execute_command, Deps, OptionalSubcommands},
+        Commands, Generator,
     },
+    DOCS_DIR,
 };
 
 mod nextjs;
@@ -55,7 +55,7 @@ impl Generator for JavaScript {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(2);
+        let bar = ProgressBar::new(3);
 
         info!("Generating JavaScript project.");
 
@@ -73,11 +73,17 @@ impl Generator for JavaScript {
         bar.inc(1);
 
         info!("Done.");
-        info!("Installing dependencies");
+        info!("Running init commands.");
 
         env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
 
         info!(dir = proj_dir.to_str());
+
+        execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Installing dependencies");
 
         install_js_deps()?;
         bar.inc(1);
@@ -124,8 +130,6 @@ impl Upgrade for JavaScript {
 /// Process [`Result`]
 fn install_js_deps() -> Result<()> {
     let strong_style = Style::new().bold();
-
-    execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
 
     let deps: Deps = serde_json::from_slice(
         DOCS_DIR

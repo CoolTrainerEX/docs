@@ -38,7 +38,7 @@ impl Generator for Tauri {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(2);
+        let bar = ProgressBar::new(3);
 
         info!("Generating Tauri project.");
 
@@ -56,11 +56,16 @@ impl Generator for Tauri {
         bar.inc(1);
 
         info!("Done.");
-        info!("Installing dependencies");
-
+        info!("Running init commands.");
+        
         env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
 
         info!(dir = proj_dir.to_str());
+
+        execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
+
+        info!("Done.");
+        info!("Installing dependencies");
 
         install_js_deps()?;
         bar.inc(1);
