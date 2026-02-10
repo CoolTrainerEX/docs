@@ -38,7 +38,7 @@ bun add -d <dep3> <dep4> # dev dependencies
 ## Docs
 
 ```sh
-deno doc
+bunx typedoc --entryPointStrategy Expand src
 ```
 
 ## Upgrading
