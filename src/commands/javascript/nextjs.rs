@@ -37,7 +37,7 @@ impl Generator for NextJS {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("deno").args(["init", "--npm", "next-app", &name]))?;
+        execute_command(Command::new("pnpm").args(["create", "next-app", &name]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -47,8 +47,8 @@ impl Generator for NextJS {
 
         info!(dir = proj_dir.to_str());
 
-        execute_command(Command::new("deno").args(["x", "shadcn", "init"]))?;
-        execute_command(Command::new("deno").args(["init", "--npm", "playwright"]))?;
+        execute_command(Command::new("pnpx").args(["shadcn", "init"]))?;
+        execute_command(Command::new("pnpm").args(["create", "playwright"]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -69,21 +69,11 @@ impl Generator for NextJS {
         ))?;
 
         if let Some(deps) = deps.deps {
-            execute_command(
-                Command::new("deno")
-                    .arg("add")
-                    .args(deps)
-                    .arg("--allow-scripts"),
-            )?;
+            execute_command(Command::new("pnpm").arg("add").args(deps))?;
         }
 
         if let Some(dev) = deps.dev {
-            execute_command(
-                Command::new("deno")
-                    .arg("add")
-                    .args(dev)
-                    .args(["--allow-scripts", "-D"]),
-            )?;
+            execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
         }
 
         bar.inc(1);

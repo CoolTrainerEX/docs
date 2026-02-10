@@ -4,10 +4,10 @@ Gin is a backend web framework for servers.
 
 ## Installation
 
-Install [Deno](../../javascript//README.md) for [Redocly CLI](https://redocly.com/docs/cli)
+Install [pnpm](../../javascript//README.md) for [Redocly CLI](https://redocly.com/docs/cli)
 
 ```sh
-deno install -A -g npm:@redocly/cli
+pnpm i -g @redocly/cli
 ```
 
 ## Usage
@@ -33,13 +33,5 @@ go tool cobra-cli init -a <username> -l <license> --viper
 ## Docs
 
 ```sh
-redocly build-docs ./openapi.yml -o ./docs/index.html
-```
-
-## Upgrading
-
-After upgrading, run:
-
-```sh
-deno install -A -g -f npm:@redocly/cli
+redocly build-docs ./openapi.yaml -o ./docs/index.html
 ```

@@ -1,17 +1,17 @@
 {
     "deps": [
-        "npm:zustand",
-        "npm:@tanstack/react-query",
-        "npm:zod"
+        "zustand",
+        "@tanstack/react-query",
+        "zod"
     ],
     "dev": [
-        "npm:orval",
-        "npm:vitest",
-        "npm:@vitejs/plugin-react",
-        "npm:jsdom",
-        "npm:@testing-library/react",
-        "npm:@testing-library/dom",
-        "npm:vite-tsconfig-paths",
-        "npm:next-themes"
+        "orval",
+        "vitest",
+        "@vitejs/plugin-react",
+        "jsdom",
+        "@testing-library/react",
+        "@testing-library/dom",
+        "vite-tsconfig-paths",
+        "next-themes"
     ]
 }

@@ -6,11 +6,7 @@ use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::commands::{
-    cpp::Cpp,
-    go::{Go, gin::Gin},
-    javascript::JavaScript,
-    kotlin::fabric::Fabric,
-    python::Python,
+    cpp::Cpp, go::Go, javascript::JavaScript, kotlin::fabric::Fabric, python::Python,
     utils::execute_command,
 };
 
@@ -31,7 +27,6 @@ fn upgrades() -> Vec<Box<dyn Upgrade>> {
     vec![
         Box::new(Cpp),
         Box::new(Go::default()),
-        Box::new(Gin),
         Box::new(JavaScript),
         Box::new(Fabric),
         Box::new(Python),

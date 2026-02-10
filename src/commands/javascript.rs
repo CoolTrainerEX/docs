@@ -11,13 +11,10 @@ use crate::{
     DOCS_DIR,
     commands::{
         Commands, Generator,
-        javascript::{
-            nextjs::NextJS,
-            tauri::{Tauri, TauriCommands},
-        },
+        javascript::{nextjs::NextJS, tauri::Tauri},
         root::Root,
         upgrade::Upgrade,
-        utils::{Deps, OptionalSubcommands, execute_command},
+        utils::{Deps, execute_command},
     },
 };
 
@@ -31,17 +28,14 @@ pub enum JSCommands {
     NextJS,
 
     /// Generate Tauri projects.
-    Tauri(OptionalSubcommands<TauriCommands>),
+    Tauri,
 }
 
 impl Commands for JSCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
             JSCommands::NextJS => Box::new(NextJS),
-            JSCommands::Tauri(optional_subcommands) => match optional_subcommands.command {
-                Some(c) => c.generator(),
-                None => Box::new(Tauri),
-            },
+            JSCommands::Tauri => Box::new(Tauri),
         }
     }
 }
@@ -69,7 +63,7 @@ impl Generator for JavaScript {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("deno").args(["init", &name]))?;
+        execute_command(Command::new("npm").arg("init"))?;
         bar.inc(1);
 
         info!("Done.");
@@ -101,9 +95,15 @@ impl Upgrade for JavaScript {
 
         info!("Upgrading JavaScript.");
         println!("{msg_style}Upgrading JavaScript.{msg_style:#}");
+
+        info!("Upgrading global tools.");
+
+        execute_command(Command::new("pnpm").args(["update", "-g"]))?;
+
+        info!("Done.");
         info!("Clearing cache.");
 
-        execute_command(Command::new("deno").arg("clean"))?;
+        execute_command(Command::new("pnpm").args(["store", "prune"]))?;
 
         info!("Done.");
         info!("Done upgrading JavaScript.");
@@ -132,21 +132,11 @@ fn install_js_deps() -> Result<()> {
     ))?;
 
     if let Some(deps) = deps.deps {
-        execute_command(
-            Command::new("deno")
-                .arg("add")
-                .args(deps)
-                .arg("--allow-scripts"),
-        )?;
+        execute_command(Command::new("pnpm").arg("add").args(deps))?;
     }
 
     if let Some(dev) = deps.dev {
-        execute_command(
-            Command::new("deno")
-                .arg("add")
-                .args(dev)
-                .args(["--allow-scripts", "-D"]),
-        )?;
+        execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
     }
 
     Ok(())

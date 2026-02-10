@@ -7,9 +7,9 @@ NextJS is used to make frontend websites.
 ### Initialization
 
 ```sh
-deno x shadcn init
+pnpx shadcn init
 cd <name>
-deno init --npm playwright
+pnpm create playwright
 ```
 
 Might need to run in a subdirectory if the current directory contains
@@ -37,8 +37,10 @@ so just use [manual setup](https://nextjs.org/docs/app/guides/testing/vitest).
 
 ### Run
 
+**VS Code** Debugger, or:
+
 ```sh
-deno task dev
+pnpm dev
 ```
 
 ### Build
@@ -46,5 +48,5 @@ deno task dev
 **GitHub Actions**, or:
 
 ```sh
-deno task build
+pnpm build
 ```

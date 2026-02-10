@@ -12,7 +12,6 @@ use crate::{
     commands::{
         Generator,
         go::Go,
-        upgrade::Upgrade,
         utils::{Deps, execute_command, extract_files},
     },
 };
@@ -119,28 +118,5 @@ impl Generator for Gin {
 
     fn docs_path(&self) -> std::path::PathBuf {
         Go::default().docs_path().join("gin")
-    }
-}
-
-impl Upgrade for Gin {
-    fn upgrade(&self) -> anyhow::Result<()> {
-        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
-
-        info!("Upgrading Gin.");
-        println!("{msg_style}Upgrading Gin.{msg_style:#}");
-        info!("Upgrading documentation tool.");
-
-        execute_command(Command::new("deno").args([
-            "install",
-            "-A",
-            "-g",
-            "-f",
-            "npm:@redocly/cli",
-        ]))?;
-
-        info!("Done.");
-        info!("Done upgrading Gin.");
-
-        Ok(())
     }
 }

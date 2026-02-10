@@ -7,7 +7,7 @@ JavaScript is used for frontend web development.
 
 ## Installation
 
-Install [Deno](https://deno.com/). For CSS Preprocessor, install [Sass](https://sass-lang.com/).
+Install [pnpm](https://pnpm.io/). For CSS Preprocessor, install [Sass](https://sass-lang.com/).
 
 ## Usage
 
@@ -16,14 +16,14 @@ Install [Deno](https://deno.com/). For CSS Preprocessor, install [Sass](https://
 Follow individual initializations, or:
 
 ```sh
-deno init <name>
+npm init
 ```
 
 #### Dependencies
 
 ```sh
-deno add <dep1> <dep2> --allow-scripts
-deno add <dep3> <dep4> --allow-scripts -D # dev dependencies
+pnpm add <dep1> <dep2>
+pnpm add -D <dep3> <dep4> # dev dependencies
 ```
 
 [Dependencies](deps.json)
@@ -39,5 +39,6 @@ deno doc
 After upgrading, run:
 
 ```sh
-deno clean
+pnpm update -g
+pnpm store prune
 ```
