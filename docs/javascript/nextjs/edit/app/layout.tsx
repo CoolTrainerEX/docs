@@ -1,5 +1,5 @@
 import { ThemeProvider } from "next-themes";
-import Providers from "./providers.tsx";
+import Providers from "./providers";
 
 export default function RootLayout({
   children,
