@@ -1,18 +1,18 @@
 {
-    "deps": [
-        "github.com/spf13/cobra",
-        "github.com/gin-gonic/gin",
-        "github.com/oapi-codegen/gin-middleware",
-        "gorm.io/gorm",
-        "github.com/golang-jwt/jwt/v5",
-        "gorm.io/driver/postgres",
-        "github.com/spf13/viper",
-        "go.uber.org/zap",
-        "github.com/gin-contrib/zap"
-    ],
-    "dev": [
-        "github.com/spf13/cobra-cli",
-        "gorm.io/cli/gorm",
-        "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen"
-    ]
+  "deps": [
+    "github.com/spf13/cobra",
+    "github.com/gin-gonic/gin",
+    "github.com/oapi-codegen/gin-middleware",
+    "gorm.io/gorm",
+    "github.com/golang-jwt/jwt/v5",
+    "gorm.io/driver/postgres",
+    "github.com/spf13/viper",
+    "go.uber.org/zap",
+    "github.com/gin-contrib/zap"
+  ],
+  "dev": [
+    "github.com/spf13/cobra-cli",
+    "gorm.io/cli/gorm",
+    "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen"
+  ]
 }

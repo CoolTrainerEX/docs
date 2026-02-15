@@ -6,10 +6,13 @@ use clap::Subcommand;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
-use crate::commands::{
-    Commands, Generator,
-    javascript::{JavaScript, install_js_deps, tauri::nextjs::NextJS},
-    utils::execute_command,
+use crate::{
+    DOCS_DIR,
+    commands::{
+        Commands, Generator,
+        javascript::{JavaScript, install_js_deps, tauri::nextjs::NextJS},
+        utils::{execute_command, extract_files},
+    },
 };
 
 mod nextjs;
@@ -38,7 +41,7 @@ impl Generator for Tauri {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(3);
+        let bar = ProgressBar::new(4);
 
         info!("Generating Tauri project.");
 
@@ -57,7 +60,7 @@ impl Generator for Tauri {
 
         info!("Done.");
         info!("Running init commands.");
-        
+
         env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
 
         info!(dir = proj_dir.to_str());
@@ -68,6 +71,18 @@ impl Generator for Tauri {
         info!("Installing dependencies");
 
         install_js_deps()?;
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Creating files.");
+
+        extract_files(
+            DOCS_DIR
+                .get_dir(self.docs_path().join("create"))
+                .context("Cannot find create directory.")?,
+            &proj_dir,
+        )?;
+
         bar.inc(1);
 
         info!("Done.");

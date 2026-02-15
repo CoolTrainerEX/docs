@@ -72,7 +72,7 @@ go tool doc2go -out ./docs/ ./...
 - pkg
   - \<name>
     - \<name>.go
-    - \<name>_test.go
+    - \<name>\_test.go
 
 ### exe
 
@@ -95,17 +95,17 @@ go tool doc2go -out ./docs/ ./...
     - main.go
   - \<lib1>
     - \<lib1>.go
-    - \<lib1>_test.go
+    - \<lib1>\_test.go
   - \<lib2>
     - \<lib2>.go
-    - \<lib2>_test.go
+    - \<lib2>\_test.go
 - pkg
   - \<lib3>
     - \<lib3>.go
-    - \<lib3>_test.go
+    - \<lib3>\_test.go
   - \<lib4>
     - \<lib4>.go
-    - \<lib4>_test.go
+    - \<lib4>\_test.go
 
 ## Upgrading
 

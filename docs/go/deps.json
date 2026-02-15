@@ -1,8 +1,4 @@
 {
-    "deps": [
-        "github.com/stretchr/testify"
-    ],
-    "dev": [
-        "go.abhg.dev/doc2go"
-    ]
+  "deps": ["github.com/stretchr/testify"],
+  "dev": ["go.abhg.dev/doc2go"]
 }

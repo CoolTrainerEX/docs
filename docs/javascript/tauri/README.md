@@ -14,6 +14,11 @@ cd <name>
 bun create @eslint/config
 ```
 
+#### Create
+
+- [`.vscode/launch.json`](create/.vscode/launch.json)
+- [`.vscode/tasks.json`](create/.vscode/tasks.json)
+
 ### Run
 
 ```sh

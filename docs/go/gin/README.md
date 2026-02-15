@@ -28,7 +28,7 @@ go tool cobra-cli init -a <username> -l <license> --viper
 
 - [`internal/api/api.go`](create/internal/api/api.go)
 - [`internal/api/cfg.yaml`](create/internal/api/cfg.yaml)
-- [`internal/db/model/model.go`](create/internal/db/model/model.go)  
+- [`internal/db/model/model.go`](create/internal/db/model/model.go)
 
 ## Docs
 

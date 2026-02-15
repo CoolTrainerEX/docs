@@ -1,13 +1,11 @@
 {
-    "deps": [
-        "pino"
-    ],
-    "dev": [
-        "typedoc",
-        "prettier",
-        "eslint-plugin-prettier",
-        "eslint-config-prettier",
-        "eslint-plugin-jsdoc",
-        "prettier-plugin-tailwindcss"
-    ]
+  "deps": ["pino"],
+  "dev": [
+    "typedoc",
+    "prettier",
+    "eslint-plugin-prettier",
+    "eslint-config-prettier",
+    "eslint-plugin-jsdoc",
+    "prettier-plugin-tailwindcss"
+  ]
 }

@@ -10,7 +10,7 @@ use crate::{
     commands::{
         Generator,
         javascript::{self, tauri::Tauri},
-        utils::{Deps, execute_command},
+        utils::{Deps, execute_command, extract_files},
     },
 };
 
@@ -23,7 +23,7 @@ impl Generator for NextJS {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(3);
+        let bar = ProgressBar::new(4);
 
         info!("Generating Tauri NextJS project.");
 
@@ -73,6 +73,18 @@ impl Generator for NextJS {
         info!("Running init commands.");
 
         execute_command(Command::new("bun").args(["run", "tauri", "init"]))?;
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Creating files.");
+
+        extract_files(
+            DOCS_DIR
+                .get_dir(self.docs_path().join("create"))
+                .context("Cannot find create directory.")?,
+            &proj_dir,
+        )?;
+
         bar.inc(1);
 
         info!("Done.");
