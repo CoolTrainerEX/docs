@@ -15,6 +15,7 @@ Follow [NextJS](../../nextjs/README.md) Initialization.
 #### Create
 
 - [`.vscode/tasks.json`](edit/.vscode/tasks.json)
+- [`.github/workflows/tauri.yml`](create/.github/workflows/tauri.yml)
 
 #### Edit
 

@@ -18,6 +18,7 @@ bun create @eslint/config
 
 - [`.vscode/launch.json`](create/.vscode/launch.json)
 - [`.vscode/tasks.json`](create/.vscode/tasks.json)
+- [`.github/workflows/tauri.yml`](create/.github/workflows/tauri.yml)
 
 ### Run
 
