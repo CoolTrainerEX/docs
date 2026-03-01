@@ -47,5 +47,5 @@ After upgrading, run:
 
 ```sh
 bun update -g
-bun pm cache rm
+bun pm cache rm -g
 ```

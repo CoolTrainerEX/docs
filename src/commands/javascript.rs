@@ -8,17 +8,17 @@ use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::{
+    DOCS_DIR,
     commands::{
+        Commands, Generator,
         javascript::{
             nextjs::NextJS,
             tauri::{Tauri, TauriCommands},
         },
         root::Root,
         upgrade::Upgrade,
-        utils::{execute_command, Deps, OptionalSubcommands},
-        Commands, Generator,
+        utils::{Deps, OptionalSubcommands, execute_command},
     },
-    DOCS_DIR,
 };
 
 mod nextjs;
@@ -115,7 +115,7 @@ impl Upgrade for JavaScript {
         info!("Done.");
         info!("Clearing cache.");
 
-        execute_command(Command::new("bun").args(["pm", "cache", "rm"]))?;
+        execute_command(Command::new("bun").args(["pm", "cache", "rm", "-g"]))?;
 
         info!("Done.");
         info!("Done upgrading JavaScript.");
