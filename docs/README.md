@@ -6,5 +6,6 @@ Docs for my personal programming paradigms.
 - [Go](go/README.md)
 - [JavaScript](javascript/README.md)
 - [Kotlin](kotlin/README.md)
+- [Lua](lua/README.md)
 - [Python](python/README.md)
 - [Rust](rust/README.md)

@@ -15,6 +15,7 @@ use crate::{
         go::{Go, GoCommands},
         javascript::{JSCommands, JavaScript},
         kotlin::{KTCommands, Kotlin},
+        lua::{Lua, LuaCommands},
         python::Python,
         rust::Rust,
         utils::OptionalSubcommands,
@@ -37,6 +38,9 @@ pub enum RootCommands {
     /// Generate Kotlin projects.
     #[command(alias = "kt")]
     Kotlin(OptionalSubcommands<KTCommands>),
+
+    /// Generate Lua projects.
+    Lua(OptionalSubcommands<LuaCommands>),
 
     /// Generate Python projects.
     #[command(alias = "py")]
@@ -62,6 +66,10 @@ impl Commands for RootCommands {
             RootCommands::Kotlin(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
                 None => Box::new(Kotlin),
+            },
+            RootCommands::Lua(optional_subcommands) => match optional_subcommands.command {
+                Some(c) => c.generator(),
+                None => Box::new(Lua),
             },
             RootCommands::Python => Box::new(Python),
             RootCommands::Rust => Box::new(Rust),

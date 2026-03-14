@@ -1,0 +1,18 @@
+// Only add when Wally deps folder exists
+{
+  "tree": {
+    "ReplicatedStorage": {
+      "Packages": {
+        "$path": "Packages"
+      },
+      "DevPackages": {
+        "$path": "DevPackages"
+      }
+    },
+    "ServerScriptService": {
+      "ServerPackages": {
+        "$path": "ServerPackages"
+      }
+    }
+  }
+}

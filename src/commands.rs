@@ -9,6 +9,7 @@ mod cpp;
 mod go;
 mod javascript;
 mod kotlin;
+mod lua;
 mod python;
 pub mod root;
 mod rust;

@@ -1,0 +1,7 @@
+[dependencies]
+# <alias> = <dep1>@<version>
+# <alias> = <dep2>@<version>
+
+[dev-dependencies]
+# <alias> = <dep3>@<version>
+# <alias> = <dep4>@<version>

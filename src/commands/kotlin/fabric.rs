@@ -45,6 +45,7 @@ impl Generator for Fabric {
 
         execute_command(Command::new(&gradlew_path).arg("vscode"))?;
         execute_command(Command::new(&gradlew_path).arg("genSources"))?;
+        bar.inc(1);
 
         info!("Done.");
         info!("Done generating project.");
