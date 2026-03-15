@@ -1,7 +1,11 @@
 [dependencies]
+React = "jsdotlua/react@17.2.1"
+Reflex = "littensy/reflex@4.3.1"
 # <alias> = <dep1>@<version>
 # <alias> = <dep2>@<version>
 
 [dev-dependencies]
+Jest = "jsdotlua/jest@3.10.0"
+JestGlobals = "jsdotlua/jest-globals@3.10.0"
 # <alias> = <dep3>@<version>
 # <alias> = <dep4>@<version>
