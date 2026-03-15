@@ -34,6 +34,7 @@ wally install
 
 #### Edit
 
+- [`default.project.json`](edit/default.project.json)
 - [`.gitignore`](edit/.gitignore)
 
 ### Run
