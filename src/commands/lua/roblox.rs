@@ -6,7 +6,15 @@ use anyhow::Context;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
-use crate::commands::{Generator, lua::Lua, upgrade::Upgrade, utils::execute_command};
+use crate::{
+    DOCS_DIR,
+    commands::{
+        Generator,
+        lua::Lua,
+        upgrade::Upgrade,
+        utils::{execute_command, extract_files},
+    },
+};
 
 /// Roblox generator
 #[derive(Debug)]
@@ -17,7 +25,7 @@ impl Generator for Roblox {
     fn generate(&mut self, name: String) -> anyhow::Result<()> {
         let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
         let strong_style = Style::new().bold();
-        let bar = ProgressBar::new(2);
+        let bar = ProgressBar::new(3);
 
         info!("Generating Roblox project.");
 
@@ -41,12 +49,28 @@ impl Generator for Roblox {
         info!("Done.");
         info!("Running init commands.");
 
-        for dep in ["rojo-rbx/rojo", "UpliftGames/wally"] {
+        for dep in [
+            "rojo-rbx/rojo",
+            "UpliftGames/wally",
+            "rojo-rbx/run-in-roblox",
+        ] {
             execute_command(Command::new("rokit").arg("add").arg(dep))?;
         }
 
         execute_command(Command::new("rojo").arg("init"))?;
         execute_command(Command::new("wally").arg("init"))?;
+        bar.inc(1);
+
+        info!("Done.");
+        info!("Creating files.");
+
+        extract_files(
+            DOCS_DIR
+                .get_dir(self.docs_path().join("create"))
+                .context("Cannot find create directory.")?,
+            &proj_dir,
+        )?;
+
         bar.inc(1);
 
         info!("Done.");

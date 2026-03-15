@@ -3,7 +3,10 @@
   "tree": {
     "ReplicatedStorage": {
       "Packages": {
-        "$path": "Packages"
+        "$path": "Packages",
+        "Project": {
+          "$path": "src"
+        }
       },
       "DevPackages": {
         "$path": "DevPackages"

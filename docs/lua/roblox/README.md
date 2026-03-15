@@ -20,6 +20,7 @@ cd <name>
 rokit init
 rokit add rojo-rbx/rojo 
 rokit add UpliftGames/wally
+rokit add rojo-rbx/run-in-roblox
 rojo init 
 wally init
 ```
@@ -32,6 +33,12 @@ Edit [`wally.toml`](edit/wally.toml)
 wally install
 ```
 
+#### Create
+
+- [`scripts/run-tests.luau`](create/scripts/run-tests.luau)
+- [`src/jest.config.luau`](create/src/jest.config.luau)
+- [`selene.toml`](create/selene.toml)
+
 #### Edit
 
 - [`default.project.json`](edit/default.project.json)
@@ -40,6 +47,12 @@ wally install
 ### Run
 
 Run in **Roblox Studio**.
+
+### Test
+
+```sh
+run-in-roblox --place <name>.rbxl --script scripts/run-tests.luau
+```
 
 ## Docs
 
