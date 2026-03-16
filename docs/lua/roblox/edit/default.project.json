@@ -2,14 +2,17 @@
 {
   "tree": {
     "ReplicatedStorage": {
+      "Stories": {
+        "$path": "src/stories"
+      },
       "Packages": {
-        "$path": "Packages",
-        "Project": {
-          "$path": "src"
-        }
+        "$path": "Packages"
       },
       "DevPackages": {
         "$path": "DevPackages"
+      },
+      "Tests": {
+        "$path": "src/__tests__"
       }
     },
     "ServerScriptService": {

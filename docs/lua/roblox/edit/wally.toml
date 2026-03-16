@@ -1,11 +1,22 @@
 [dependencies]
 React = "jsdotlua/react@17.2.1"
+ReactRoblox = "jsdotlua/react-roblox@17.2.1"
 Reflex = "littensy/reflex@4.3.1"
+Replica = "ivasmigins/replica@0.1.0"
 # <alias> = <dep1>@<version>
 # <alias> = <dep2>@<version>
 
 [dev-dependencies]
 Jest = "jsdotlua/jest@3.10.0"
 JestGlobals = "jsdotlua/jest-globals@3.10.0"
+UILabs = "pepeeltoro41/ui-labs@2.4.2"
 # <alias> = <dep3>@<version>
 # <alias> = <dep4>@<version>
+
+[server-dependencies]
+ProfileStore = "lm-loleris/profilestore@1.0.3"
+# <alias> = <dep5>@<version>
+# <alias> = <dep6>@<version>
+
+[place]
+shared-packages = "game.ReplicatedStorage.Packages"
