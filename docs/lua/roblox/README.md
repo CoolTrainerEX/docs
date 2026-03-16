@@ -36,11 +36,15 @@ wally install
 #### Create
 
 - [`scripts/run-tests.luau`](create/scripts/run-tests.luau)
-- [`src/jest.config.luau`](create/src/jest.config.luau)
+- [`src/jest.config.luau`](create/src/__tests__/jest.config.luau)
+- [`src/client/App.luau`](create/src/client/App.luau)
+- [`src/stories/App.story.luau`](create/src/stories/App.story.luau)
 - [`selene.toml`](create/selene.toml)
 
 #### Edit
 
+- [`src/client/init.client.luau`](edit/src/client/init.client.luau)
+- [`src/server/init.server.luau`](edit/src/server/init.server.luau)
 - [`default.project.json`](edit/default.project.json)
 - [`.gitignore`](edit/.gitignore)
 
