@@ -1,9 +1,0 @@
-{
-    "dev": [
-        {
-            "alias": "Jest",
-            "name": "jsdotlua/jest"
-        },
-        "jsdotlua/jest-globals"
-    ]
-}

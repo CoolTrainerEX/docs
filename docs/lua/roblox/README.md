@@ -21,6 +21,7 @@ rokit init
 rokit add rojo-rbx/rojo 
 rokit add UpliftGames/wally
 rokit add rojo-rbx/run-in-roblox
+rokit add JohnnyMorganz/wally-package-types
 rojo init 
 wally init
 ```
@@ -31,6 +32,13 @@ Edit [`wally.toml`](edit/wally.toml)
 
 ```sh
 wally install
+```
+
+#### continued
+
+```sh
+rojo sourcemap default.project.json --output sourcemap.json
+wally-package-types --sourcemap sourcemap.json Packages/ DevPackages/ ServerPackages/
 ```
 
 #### Create
