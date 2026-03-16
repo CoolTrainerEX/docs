@@ -4,11 +4,11 @@ local Promise = require(ReplicatedStorage.Packages.Promise)
 local Replica = require(ReplicatedStorage.Packages.Replica)
 local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 
-local PROFILE_TEMPLATE = {}
+local PROFILE_TEMPLATE: { Money: number } = { Money = 0 }
 
 local PlayerStore = ProfileStore.New("PlayerStore", PROFILE_TEMPLATE)
-local Profiles = {}
-local Replicas = {}
+local Profiles: { [Player]: ProfileStore.Profile<typeof(PROFILE_TEMPLATE)> } = {}
+local Replicas: { [Player]: typeof(Replica.New()) } = {}
 
 local function PlayerAdded(player)
 	Promise.try(function()
