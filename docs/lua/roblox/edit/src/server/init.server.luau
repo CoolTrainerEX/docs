@@ -7,7 +7,7 @@ local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 local PROFILE_TEMPLATE: { Money: number } = { Money = 0 }
 
 local PlayerStore = ProfileStore.New("PlayerStore", PROFILE_TEMPLATE)
-local Profiles: { [Player]: ProfileStore.Profile<typeof(PROFILE_TEMPLATE)> } = {}
+local Profiles: { [Player]: typeof(PlayerStore:StartSessionAsync()) } = {}
 local Replicas: { [Player]: typeof(Replica.New()) } = {}
 
 local function PlayerAdded(player)
