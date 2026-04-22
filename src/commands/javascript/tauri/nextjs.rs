@@ -60,11 +60,11 @@ impl Generator for NextJS {
         ))?;
 
         if let Some(deps) = deps.deps {
-            execute_command(Command::new("bun").arg("add").args(deps))?;
+            execute_command(Command::new("pnpm").arg("add").args(deps))?;
         }
 
         if let Some(dev) = deps.dev {
-            execute_command(Command::new("bun").args(["add", "-d"]).args(dev))?;
+            execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
         }
 
         bar.inc(1);
@@ -72,7 +72,7 @@ impl Generator for NextJS {
         info!("Done.");
         info!("Running init commands.");
 
-        execute_command(Command::new("bun").args(["run", "tauri", "init"]))?;
+        execute_command(Command::new("pnpm").args(["tauri", "init"]))?;
         bar.inc(1);
 
         info!("Done.");

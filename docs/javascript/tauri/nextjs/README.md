@@ -28,5 +28,5 @@ Follow [NextJS](../../nextjs/README.md) Initialization.
 #### continued
 
 ```sh
-bun run tauri init
+pnpm tauri init
 ```

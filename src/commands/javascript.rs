@@ -1,4 +1,4 @@
-use std::{env, process::Command};
+use std::{env, fs, process::Command};
 
 use anstream::println;
 use anstyle::{AnsiColor, Style};
@@ -59,27 +59,28 @@ impl Generator for JavaScript {
 
         info!("Generating JavaScript project.");
 
-        let current_dir = env::current_dir().context("Failed to get current directory")?;
-        let proj_dir = current_dir.join(&name);
+        let proj_dir = env::current_dir()
+            .context("Failed to get current directory")?
+            .join(&name);
 
         println!(
             "{msg_style}Generating JavaScript project in {msg_style:#}{strong_style}{}{strong_style:#}{msg_style}.{msg_style:#}",
             proj_dir.display()
         );
         info!("Running init command.");
-        info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("bun").args(["init", &name]))?;
+        fs::create_dir_all(&proj_dir).context("Failed to create directory.")?;
+        env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
+
+        info!(dir = proj_dir.to_str());
+
+        execute_command(Command::new("npm").arg("init"))?;
         bar.inc(1);
 
         info!("Done.");
         info!("Running init commands.");
 
-        env::set_current_dir(&proj_dir).context("Failed to change working directory.")?;
-
-        info!(dir = proj_dir.to_str());
-
-        execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
+        execute_command(Command::new("pnpm").args(["create", "@eslint/config"]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -110,12 +111,12 @@ impl Upgrade for JavaScript {
 
         info!("Upgrading global tools.");
 
-        execute_command(Command::new("bun").args(["update", "-g"]))?;
+        execute_command(Command::new("pnpm").args(["update", "-g"]))?;
 
         info!("Done.");
         info!("Clearing cache.");
 
-        execute_command(Command::new("bun").args(["pm", "cache", "rm", "-g"]))?;
+        execute_command(Command::new("pnpm").args(["store", "prune"]))?;
 
         info!("Done.");
         info!("Done upgrading JavaScript.");
@@ -144,11 +145,11 @@ fn install_js_deps() -> Result<()> {
     ))?;
 
     if let Some(deps) = deps.deps {
-        execute_command(Command::new("bun").arg("add").args(deps))?;
+        execute_command(Command::new("pnpm").arg("add").args(deps))?;
     }
 
     if let Some(dev) = deps.dev {
-        execute_command(Command::new("bun").args(["add", "-d"]).args(dev))?;
+        execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
     }
 
     Ok(())

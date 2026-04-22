@@ -48,6 +48,6 @@ pub enum Subcommands {
     #[command(flatten)]
     Generate(RootCommands),
 
-    /// Run upgrades. Uses Scoop.
+    /// Run upgrades.
     Upgrade,
 }

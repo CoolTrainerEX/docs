@@ -4,10 +4,10 @@ Lua is used for Roblox game development.
 
 ## Installation
 
-Install [Rokit](https://github.com/rojo-rbx/rokit) and [Moonwave](https://eryn.io/moonwave/). [Bun](../../javascript//README.md) is needed for Moonwave.
+Install [Rokit](https://github.com/rojo-rbx/rokit) and [Moonwave](https://eryn.io/moonwave/). [JavaScript](../../javascript/README.md) is needed for Moonwave.
 
 ```sh
-bun add -g moonwave
+pnpm add -g moonwave
 ```
 
 ## Usage

@@ -37,7 +37,7 @@ impl Generator for NextJS {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("bun").args(["create", "next-app", &name]))?;
+        execute_command(Command::new("pnpm").args(["create", "next-app", &name]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -47,8 +47,8 @@ impl Generator for NextJS {
 
         info!(dir = proj_dir.to_str());
 
-        execute_command(Command::new("bunx").args(["shadcn", "init"]))?;
-        execute_command(Command::new("bun").args(["create", "playwright"]))?;
+        execute_command(Command::new("pnpx").args(["shadcn", "init"]))?;
+        execute_command(Command::new("pnpm").args(["create", "playwright"]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -69,11 +69,11 @@ impl Generator for NextJS {
         ))?;
 
         if let Some(deps) = deps.deps {
-            execute_command(Command::new("bun").arg("add").args(deps))?;
+            execute_command(Command::new("pnpm").arg("add").args(deps))?;
         }
 
         if let Some(dev) = deps.dev {
-            execute_command(Command::new("bun").args(["add", "-d"]).args(dev))?;
+            execute_command(Command::new("pnpm").args(["add", "-D"]).args(dev))?;
         }
 
         bar.inc(1);

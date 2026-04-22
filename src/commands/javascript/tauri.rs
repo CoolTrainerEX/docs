@@ -55,7 +55,7 @@ impl Generator for Tauri {
         info!("Running init command.");
         info!(dir = current_dir.to_str());
 
-        execute_command(Command::new("bun").args(["create", "tauri-app", &name]))?;
+        execute_command(Command::new("pnpm").args(["create", "tauri-app", &name]))?;
         bar.inc(1);
 
         info!("Done.");
@@ -65,7 +65,7 @@ impl Generator for Tauri {
 
         info!(dir = proj_dir.to_str());
 
-        execute_command(Command::new("bun").args(["create", "@eslint/config"]))?;
+        execute_command(Command::new("pnpm").args(["create", "@eslint/config"]))?;
 
         info!("Done.");
         info!("Installing dependencies");

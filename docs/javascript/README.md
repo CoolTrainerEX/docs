@@ -7,7 +7,7 @@ JavaScript is used for frontend web development.
 
 ## Installation
 
-Install [Bun](https://bun.com/).
+Install [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/).
 
 ## Usage
 
@@ -16,16 +16,17 @@ Install [Bun](https://bun.com/).
 Follow individual initializations, or:
 
 ```sh
-bun init <name>
+mkdir <name>
 cd <name>
-bun create @eslint/config
+npm init
+pnpm create @eslint/config
 ```
 
 #### Dependencies
 
 ```sh
-bun add <dep1> <dep2>
-bun add -d <dep3> <dep4> # dev dependencies
+pnpm add <dep1> <dep2>
+pnpm add -D <dep3> <dep4> # dev dependencies
 ```
 
 [Dependencies](deps.json)
@@ -38,7 +39,7 @@ bun add -d <dep3> <dep4> # dev dependencies
 ## Docs
 
 ```sh
-bunx typedoc --entryPointStrategy Expand src
+pnpm typedoc --entryPointStrategy Expand src
 ```
 
 ## Upgrading
@@ -46,6 +47,6 @@ bunx typedoc --entryPointStrategy Expand src
 After upgrading, run:
 
 ```sh
-bun update -g
-bun pm cache rm -g
+pnpm update -g
+pnpm store prune
 ```

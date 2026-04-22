@@ -1,14 +1,9 @@
-use std::process::Command;
-
 use anstyle::{AnsiColor, Style};
 use anyhow::Result;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
-use crate::commands::{
-    cpp::Cpp, go::Go, javascript::JavaScript, kotlin::fabric::Fabric, python::Python,
-    utils::execute_command,
-};
+use crate::commands::{cpp::Cpp, go::Go, javascript::JavaScript, python::Python};
 
 /// Upgraders
 pub(super) trait Upgrade {
@@ -28,12 +23,11 @@ fn upgrades() -> Vec<Box<dyn Upgrade>> {
         Box::new(Cpp),
         Box::new(Go::default()),
         Box::new(JavaScript),
-        Box::new(Fabric),
         Box::new(Python),
     ]
 }
 
-/// Run upgrade commands. Uses [Scoop](https://scoop.sh/).
+/// Run upgrade commands.
 ///
 /// # Returns
 /// Process [`Result`]
@@ -46,18 +40,6 @@ pub fn upgrade() -> Result<()> {
 
     info!("Upgrading.");
     println!("{msg_style}Upgrading.{msg_style:#}");
-    info!("Upgrading Scoop apps.");
-
-    execute_command(Command::new("scoop.cmd").args(["update", "-a"]))?;
-    bar.inc(1);
-
-    info!("Done.");
-    info!("Clearing cache.");
-
-    execute_command(Command::new("scoop.cmd").args(["cleanup", "-a", "-k"]))?;
-    bar.inc(1);
-
-    info!("Done.");
 
     for upgrade in upgrades {
         upgrade.upgrade()?;

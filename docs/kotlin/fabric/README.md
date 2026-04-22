@@ -2,21 +2,11 @@
 
 Fabric is used for Minecraft mod development.
 
-## Installation
-
-Install [Deno](../../javascript/README.md) for the [Fabric CLI](https://fabricmc.net/develop/cli/).
-
-```sh
-deno install -A -g -n fabric https://fabricmc.net/cli
-```
-
 ## Usage
 
 ### Initialization
 
-```sh
-fabric init <name>
-```
+Use the [Template Mod Generator](https://fabricmc.net/develop/template/)
 
 Use Kotlin. Package name is `com.<username>`.
 
@@ -42,11 +32,4 @@ Run `vscode` and `genSources` Gradle task using [**VS Code Gradle for Java Exten
 
 ```sh
 ./gradlew build
-```
-
-### Upgrading
-
-```sh
-fabric upgrade
-deno clean
 ```

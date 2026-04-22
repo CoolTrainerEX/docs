@@ -9,9 +9,9 @@ Tauri is used to make GUI apps.
 ### Initialization
 
 ```sh
-bun create tauri-app <name>
+pnpm create tauri-app <name>
 cd <name>
-bun create @eslint/config
+pnpm create @eslint/config
 ```
 
 #### Create
@@ -23,7 +23,7 @@ bun create @eslint/config
 ### Run
 
 ```sh
-bun run tauri dev
+pnpm tauri dev
 ```
 
 ### Build
@@ -31,5 +31,5 @@ bun run tauri dev
 **GitHub Actions**, or:
 
 ```sh
-bun run tauri build
+pnpm tauri build
 ```

@@ -59,25 +59,3 @@ impl Generator for Fabric {
         Kotlin.docs_path().join("fabric")
     }
 }
-
-impl Upgrade for Fabric {
-    fn upgrade(&self) -> anyhow::Result<()> {
-        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
-
-        info!("Upgrading Fabric.");
-        println!("{msg_style}Upgrading Fabric.{msg_style:#}");
-        info!("Upgrading.");
-
-        execute_command(Command::new("fabric.cmd").arg("upgrade"))?;
-
-        info!("Done.");
-        info!("Clearing cache.");
-
-        execute_command(Command::new("deno").arg("clean"))?;
-
-        info!("Done.");
-        info!("Done upgrading Fabric.");
-
-        Ok(())
-    }
-}
