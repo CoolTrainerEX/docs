@@ -6,7 +6,7 @@ use anyhow::Context;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
-use crate::commands::{Generator, kotlin::Kotlin, upgrade::Upgrade, utils::execute_command};
+use crate::commands::{Generator, kotlin::Kotlin, utils::execute_command};
 
 /// Fabric generator
 #[derive(Debug)]
