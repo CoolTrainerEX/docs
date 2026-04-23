@@ -47,7 +47,7 @@ pub fn upgrade() -> Result<()> {
     println!("{msg_style}Upgrading.{msg_style:#}");
     info!("Upgrading apps.");
 
-    execute_command(Command::new("nix").args(["profile", "upgrade"]))?;
+    execute_command(Command::new("nix").args(["profile", "upgrade", "--all"]))?;
     execute_command(Command::new("sudo").args(["apt", "update"]))?;
     execute_command(Command::new("sudo").args(["apt", "upgrade"]))?;
     bar.inc(1);
