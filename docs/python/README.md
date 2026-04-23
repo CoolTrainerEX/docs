@@ -62,6 +62,7 @@ Do not need to run `make` if using [Read the Docs](https://app.readthedocs.org/d
 After upgrading, run:
 
 ```sh
+uv python upgrade
 uv tool upgrade --all
 uv cache prune
 ```

@@ -9,7 +9,7 @@ use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
-    commands::{Generator, root::Root, utils::execute_command},
+    commands::{Generator, root::Root, upgrade::Upgrade, utils::execute_command},
 };
 
 /// Rust generator
@@ -121,4 +121,21 @@ fn parse_deps(deps: &[DepEntry]) -> impl IntoIterator<Item = impl AsRef<OsStr>> 
             )
             .collect(),
     })
+}
+
+impl Upgrade for Rust {
+    fn upgrade(&self) -> anyhow::Result<()> {
+        let msg_style = Style::new().fg_color(Some(AnsiColor::Blue.into()));
+
+        info!("Upgrading Rust.");
+        println!("{msg_style}Upgrading Rust.{msg_style:#}");
+        info!("Upgrading app.");
+
+        execute_command(Command::new("rustup").arg("update"))?;
+
+        info!("Done.");
+        info!("Done upgrading Rust.");
+
+        Ok(())
+    }
 }

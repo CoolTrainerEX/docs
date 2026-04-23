@@ -108,7 +108,14 @@ impl Upgrade for JavaScript {
 
         info!("Upgrading JavaScript.");
         println!("{msg_style}Upgrading JavaScript.{msg_style:#}");
+        info!("Upgrading app.");
 
+        execute_command(Command::new("fnm").args(["install", "--latest"]))?;
+        execute_command(Command::new("fnm").args(["default", "latest"]))?;
+        execute_command(Command::new("npm").args(["install", "corepack", "-g"]))?;
+        execute_command(Command::new("corepack").args(["enable", "pnpm"]))?;
+
+        info!("Done.");
         info!("Upgrading global tools.");
 
         execute_command(Command::new("pnpm").args(["update", "-g"]))?;

@@ -111,6 +111,11 @@ impl Upgrade for Python {
 
         info!("Upgrading Python.");
         println!("{msg_style}Upgrading Python.{msg_style:#}");
+        info!("Upgrading app.");
+
+        execute_command(Command::new("uv").args(["python", "upgrade"]))?;
+
+        info!("Done.");
         info!("Upgrading tools.");
 
         execute_command(Command::new("uv").args(["tool", "upgrade", "--all"]))?;

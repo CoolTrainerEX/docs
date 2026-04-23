@@ -45,3 +45,11 @@ cargo doc
 ```
 
 It outputs in `/target` directory and must be manually copied to `/docs` for GitHub Pages.
+
+## Upgrading
+
+After upgrading, run:
+
+```sh
+rustup update
+```

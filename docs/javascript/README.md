@@ -7,7 +7,7 @@ JavaScript is used for frontend web development.
 
 ## Installation
 
-Install [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/).
+Install [fnm](https://github.com/Schniz/fnm) and [pnpm](https://pnpm.io/).
 
 ## Usage
 
@@ -47,6 +47,10 @@ pnpm typedoc --entryPointStrategy Expand src
 After upgrading, run:
 
 ```sh
+fnm install --latest
+fnm default latest
+npm install -g corepack
+corepack enable pnpm
 pnpm update -g
 pnpm store prune
 ```

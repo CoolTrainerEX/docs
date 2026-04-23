@@ -21,7 +21,6 @@ ninja/[*]
 
 [conf]
 tools.cmake.cmaketoolchain:generator=Ninja
-tools.env.virtualenv:powershell=powershell.exe
 {% endif %}
 ```
 

@@ -167,17 +167,8 @@ impl Upgrade for Cpp {
 
         info!("Upgrading C++.");
         println!("{msg_style}Upgrading C++.{msg_style:#}");
-        info!("Upgrading apps.");
-
-        execute_command(Command::new("apt").arg("update"))?;
-        execute_command(Command::new("apt").arg("upgrade"))?;
-
-        info!("Done.");
         info!("Clearing cache.");
 
-        execute_command(Command::new("apt").arg("clean"))?;
-        execute_command(Command::new("apt").arg("autoclean"))?;
-        execute_command(Command::new("apt").arg("autoremove"))?;
         execute_command(Command::new("conan").args(["cache", "clean"]))?;
 
         info!("Done.");
