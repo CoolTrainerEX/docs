@@ -1,9 +1,13 @@
+use std::process::Command;
+
 use anstyle::{AnsiColor, Style};
 use anyhow::Result;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
-use crate::commands::{cpp::Cpp, go::Go, javascript::JavaScript, python::Python, rust::Rust};
+use crate::commands::{
+    cpp::Cpp, go::Go, javascript::JavaScript, python::Python, rust::Rust, utils::execute_command,
+};
 
 /// Upgraders
 pub(super) trait Upgrade {
@@ -28,7 +32,7 @@ fn upgrades() -> Vec<Box<dyn Upgrade>> {
     ]
 }
 
-/// Run upgrade commands.
+/// Run upgrade commands. Uses [Nix](https://nixos.org/)
 ///
 /// # Returns
 /// Process [`Result`]
@@ -41,6 +45,22 @@ pub fn upgrade() -> Result<()> {
 
     info!("Upgrading.");
     println!("{msg_style}Upgrading.{msg_style:#}");
+    info!("Upgrading apps.");
+
+    execute_command(Command::new("nix").args(["profile", "upgrade"]))?;
+    execute_command(Command::new("sudo").args(["apt", "update"]))?;
+    execute_command(Command::new("sudo").args(["apt", "upgrade"]))?;
+    bar.inc(1);
+
+    info!("Done.");
+    info!("Clearing cache.");
+
+    execute_command(Command::new("nix-collect-garbage").arg("-d"))?;
+    execute_command(Command::new("sudo").args(["apt", "clean"]))?;
+    execute_command(Command::new("sudo").args(["apt", "autoremove"]))?;
+    bar.inc(1);
+
+    info!("Done.");
 
     for upgrade in upgrades {
         upgrade.upgrade()?;

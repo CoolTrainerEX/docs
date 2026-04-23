@@ -36,7 +36,7 @@ pub trait Generator {
     /// Process [`Result`]
     fn generate(&mut self, name: String) -> Result<()>;
 
-    /// Returns the relative documentation path
+    /// Returns the relative documentation path.
     ///
     /// # Returns
     /// Documentation path
