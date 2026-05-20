@@ -1,3 +1,9 @@
 {
-  "deps": ["doxygen", "gtest"]
+  "deps": [
+    "gtest",
+    "spdlog"
+  ],
+  "dev": [
+    "doxygen"
+  ]
 }

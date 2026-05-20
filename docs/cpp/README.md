@@ -47,8 +47,6 @@ conan new cmake_lib -d name=<name> -d requires=<dep1>/<version> -d requires=<dep
 
 [Dependencies](deps.json)
 
-[Doxygen](https://www.doxygen.nl/) has a broken build, so use global install instead.
-
 #### continued
 
 ```sh
