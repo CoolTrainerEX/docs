@@ -52,7 +52,7 @@ conan new cmake_lib -d name=<name> -d requires=<dep1>/<version> -d requires=<dep
 ```sh
 conan install . --build=missing
 conan install . -s build_type=Debug --build=missing
-bass source build/Debug/generators/conanbuild.sh # Run this to setup environment
+bass source build/Debug/generators/conanbuild.sh
 doxygen -g
 ```
 
@@ -75,6 +75,7 @@ doxygen -g
 ## Docs
 
 ```sh
+bass source build/Debug/generators/conanbuild.sh
 doxygen
 ```
 
