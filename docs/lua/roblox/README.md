@@ -37,8 +37,8 @@ wally install
 #### continued
 
 ```sh
-rojo sourcemap default.project.json --output sourcemap.json
-wally-package-types --sourcemap sourcemap.json Packages/ DevPackages/ ServerPackages/
+rojo sourcemap ./default.project.json --output ./sourcemap.json
+wally-package-types --sourcemap ./sourcemap.json ./Packages/ ./DevPackages/ ./ServerPackages/
 ```
 
 #### Create
@@ -63,7 +63,7 @@ Run in **Roblox Studio**.
 ### Test
 
 ```sh
-run-in-roblox --place <name>.rbxl --script scripts/run-tests.luau
+run-in-roblox --place ./<name>.rbxl --script ./scripts/run-tests.luau
 ```
 
 ## Docs

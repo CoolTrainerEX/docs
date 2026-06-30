@@ -39,7 +39,7 @@ pnpm add -D <dep3> <dep4> # dev dependencies
 ## Docs
 
 ```sh
-pnpm typedoc --entryPointStrategy Expand src
+pnpm typedoc --entryPointStrategy Expand ./src/
 ```
 
 ## Upgrading
