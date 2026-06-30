@@ -18,11 +18,11 @@ pnpm add -g moonwave
 mkdir <name>
 cd <name>
 rokit init
-rokit add rojo-rbx/rojo 
+rokit add rojo-rbx/rojo
 rokit add UpliftGames/wally
 rokit add rojo-rbx/run-in-roblox
 rokit add JohnnyMorganz/wally-package-types
-rojo init 
+rojo init
 wally init
 ```
 
