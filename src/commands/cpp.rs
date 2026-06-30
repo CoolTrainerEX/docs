@@ -132,9 +132,9 @@ impl Generator for Cpp {
         info!("Done.");
         info!("Running documentation init commands.");
 
-        execute_command(Command::new("fish").args([
+        execute_command(Command::new("bash").args([
             "-c",
-            "bass source build/Debug/generators/conanbuild.sh; doxygen -g",
+            "build/Debug/generators/conanbuild.sh && doxygen -g",
         ]))?;
         bar.inc(1);
 

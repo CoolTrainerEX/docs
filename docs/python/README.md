@@ -52,7 +52,7 @@ uv run ./main.py
 
 ```sh
 sphinx-apidoc -o ./docs/ ./
-./docs/make.bat html
+make -C docs html
 ```
 
 Do not need to run `make` if using [Read the Docs](https://app.readthedocs.org/dashboard/)
