@@ -32,7 +32,7 @@ fn upgrades() -> Vec<Box<dyn Upgrade>> {
     ]
 }
 
-/// Run upgrade commands. Uses [Nix](https://nixos.org/)
+/// Run upgrade commands.
 ///
 /// # Returns
 /// Process [`Result`]
@@ -47,7 +47,6 @@ pub fn upgrade() -> Result<()> {
     println!("{msg_style}Upgrading.{msg_style:#}");
     info!("Upgrading apps.");
 
-    execute_command(Command::new("nix").args(["profile", "upgrade", "--all"]))?;
     execute_command(Command::new("sudo").args(["apt", "update"]))?;
     execute_command(Command::new("sudo").args(["apt", "upgrade"]))?;
     bar.inc(1);
@@ -55,7 +54,6 @@ pub fn upgrade() -> Result<()> {
     info!("Done.");
     info!("Clearing cache.");
 
-    execute_command(Command::new("nix-collect-garbage").arg("-d"))?;
     execute_command(Command::new("sudo").args(["apt", "clean"]))?;
     execute_command(Command::new("sudo").args(["apt", "autoremove"]))?;
     bar.inc(1);

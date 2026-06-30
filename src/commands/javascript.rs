@@ -111,6 +111,7 @@ impl Upgrade for JavaScript {
         info!("Upgrading app.");
 
         execute_command(Command::new("npm").args(["update", "-g"]))?;
+        execute_command(Command::new("corepack").args(["install", "-g", "pnpm"]))?;
 
         info!("Done.");
         info!("Upgrading global tools.");
@@ -121,6 +122,7 @@ impl Upgrade for JavaScript {
         info!("Clearing cache.");
 
         execute_command(Command::new("pnpm").args(["store", "prune"]))?;
+        execute_command(Command::new("corepack").args(["cache", "clean"]))?;
 
         info!("Done.");
         info!("Done upgrading JavaScript.");

@@ -48,6 +48,8 @@ After upgrading, run:
 
 ```sh
 npm update -g
+corepack install -g pnpm
+corepack cache clean
 pnpm update -g
 pnpm store prune
 ```
