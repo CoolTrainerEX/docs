@@ -7,13 +7,13 @@ use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::{
-    DOCS_DIR,
     commands::{
-        Generator,
         lua::Lua,
         upgrade::Upgrade,
         utils::{execute_command, extract_files},
+        Generator,
     },
+    DOCS_DIR,
 };
 
 /// Roblox generator
@@ -53,6 +53,7 @@ impl Generator for Roblox {
             "rojo-rbx/rojo",
             "UpliftGames/wally",
             "rojo-rbx/run-in-roblox",
+            "JohnnyMorganz/wally-package-types",
         ] {
             execute_command(Command::new("rokit").arg("add").arg(dep))?;
         }
