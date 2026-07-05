@@ -1,17 +1,24 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Janitor = require(ReplicatedStorage.Packages.Janitor)
 local Promise = require(ReplicatedStorage.Packages.Promise)
 local Replica = require(ReplicatedStorage.Packages.Replica)
 local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 
-local PROFILE_TEMPLATE: { Money: number } = { Money = 0 }
+local PlayerStore = ProfileStore.New("PlayerStore", {})
+local PlayerData: {
+	[Player]: {
+		Profile: typeof(PlayerStore:StartSessionAsync()),
+		Replica: typeof(Replica.New()),
+		Janitor: typeof(Janitor.new()),
+	},
+} =
+	{}
 
-local PlayerStore = ProfileStore.New("PlayerStore", PROFILE_TEMPLATE)
-local Profiles: { [Player]: typeof(PlayerStore:StartSessionAsync()) } = {}
-local Replicas: { [Player]: typeof(Replica.New()) } = {}
+local PlayerPromises: { [Player]: typeof(Promise.try()) } = {}
 
 local function PlayerAdded(player)
-	Promise.try(function()
+	PlayerPromises[player] = Promise.try(function()
 		return PlayerStore:StartSessionAsync(`{player.UserId}`, {
 			Cancel = function()
 				return player.Parent ~= Players
@@ -23,18 +30,25 @@ local function PlayerAdded(player)
 			profile:Reconcile()
 
 			profile.OnSessionEnd:Connect(function()
-				Profiles[player] = nil
-				Replicas[player] = nil
+				PlayerData[player] = nil
 				player:Kick(`Profile session end - Please rejoin`)
 			end)
 
 			if player.Parent == Players then
-				Profiles[player] = profile
-				Replicas[player] = Replica.New({ Token = Replica.Token(`{player.UserId}`), Data = profile.Data })
+				local janitor = Janitor.new()
+
+				PlayerData[player] = {
+					Profile = janitor:Add(profile, "EndSession"),
+					Entity = janitor:Add(Replica.New({ Token = Replica.Token("ProfileData"), Data = profile.Data })),
+					Janitor = janitor,
+				}
 
 				print(`Profile loaded for {player.DisplayName}!`)
+
+				return PlayerData[player]
 			else
 				profile:EndSession()
+				return
 			end
 		end)
 		:catch(function()
@@ -42,24 +56,27 @@ local function PlayerAdded(player)
 		end)
 end
 
+function InitReplica(player)
+	local playerPromise = PlayerPromises[player]
+
+	if playerPromise then
+		playerPromise:andThen(function(playerData)
+			playerData.Entity.Replica:Subscribe(player)
+		end)
+	end
+end
+
 for _, player in Players:GetPlayers() do
 	task.spawn(PlayerAdded, player)
 end
 
 Players.PlayerAdded:Connect(PlayerAdded)
-
-Replica.NewReadyPlayer:Connect(function(player)
-	local replica = Replicas[player]
-
-	if replica then
-		replica:Subscribe(player)
-	end
-end)
+Replica.NewReadyPlayer:Connect(InitReplica)
 
 Players.PlayerRemoving:Connect(function(player)
-	local profile = Profiles[player]
+	local playerData = PlayerData[player]
 
-	if profile then
-		profile:EndSession()
+	if playerData then
+		playerData.Janitor:Cleanup()
 	end
 end)
