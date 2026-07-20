@@ -40,7 +40,7 @@ local function PlayerAdded(player)
 
 				PlayerData[player] = {
 					Profile = janitor:Add(profile, "EndSession"),
-					Entity = janitor:Add(Replica.New({ Token = Replica.Token("ProfileData"), Data = profile.Data })),
+					Replica = janitor:Add(Replica.New({ Token = Replica.Token("ProfileData"), Data = profile.Data })),
 					Janitor = janitor,
 				}
 
@@ -68,7 +68,7 @@ Replica.NewReadyPlayer:Connect(function(player: Player)
 
 	if playerPromise then
 		playerPromise:andThen(function(playerData)
-			playerData.Entity.Replica:Subscribe(player)
+			playerData.Replica:Subscribe(player)
 		end)
 	end
 end)
