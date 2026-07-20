@@ -63,7 +63,7 @@ end
 
 Players.PlayerAdded:Connect(PlayerAdded)
 
-Replica.NewReadyPlayer:Connect(function(player: player)
+Replica.NewReadyPlayer:Connect(function(player: Player)
 	local playerPromise = PlayerPromises[player]
 
 	if playerPromise then
