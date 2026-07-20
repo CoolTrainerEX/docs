@@ -8,6 +8,6 @@ local Replica = require(ReplicatedStorage.Packages.Replica)
 ReactRoblox.createRoot(Instance.new("Folder"))
 	:render(ReactRoblox.createPortal(React.createElement(App), Players.LocalPlayer.PlayerGui))
 
-Replica.OnNew(`{Players.LocalPlayer.UserId}`, function() end)
+Replica.OnNew("ProfileData", function() end)
 
 Replica.RequestData()

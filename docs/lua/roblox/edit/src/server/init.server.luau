@@ -6,6 +6,7 @@ local Replica = require(ReplicatedStorage.Packages.Replica)
 local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 
 local PlayerStore = ProfileStore.New("PlayerStore", {})
+
 local PlayerData: {
 	[Player]: {
 		Profile: typeof(PlayerStore:StartSessionAsync()),
@@ -56,7 +57,13 @@ local function PlayerAdded(player)
 		end)
 end
 
-function InitReplica(player)
+for _, player in Players:GetPlayers() do
+	task.spawn(PlayerAdded, player)
+end
+
+Players.PlayerAdded:Connect(PlayerAdded)
+
+Replica.NewReadyPlayer:Connect(function(player: player)
 	local playerPromise = PlayerPromises[player]
 
 	if playerPromise then
@@ -64,16 +71,9 @@ function InitReplica(player)
 			playerData.Entity.Replica:Subscribe(player)
 		end)
 	end
-end
+end)
 
-for _, player in Players:GetPlayers() do
-	task.spawn(PlayerAdded, player)
-end
-
-Players.PlayerAdded:Connect(PlayerAdded)
-Replica.NewReadyPlayer:Connect(InitReplica)
-
-Players.PlayerRemoving:Connect(function(player)
+Players.PlayerRemoving:Connect(function(player: Player)
 	local playerData = PlayerData[player]
 
 	if playerData then
