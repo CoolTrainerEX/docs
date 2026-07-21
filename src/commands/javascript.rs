@@ -110,7 +110,7 @@ impl Upgrade for JavaScript {
         println!("{msg_style}Upgrading JavaScript.{msg_style:#}");
         info!("Upgrading app.");
 
-        execute_command(Command::new("npm").args(["update", "-g"]))?;
+        execute_command(Command::new("sudo").args(["npm", "update", "-g"]))?;
         execute_command(Command::new("corepack").args(["install", "-g", "pnpm"]))?;
 
         info!("Done.");
