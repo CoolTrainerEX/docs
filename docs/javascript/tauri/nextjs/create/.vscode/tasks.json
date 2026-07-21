@@ -4,29 +4,24 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build:debug",
-      "type": "cargo",
-      "command": "build",
-      "options": {
-        "cwd": "${workspaceRoot}/src-tauri"
-      }
-    },
-    {
       "label": "ui:dev",
       "type": "shell",
       // `dev` keeps running in the background
       // ideally you should also configure a `problemMatcher`
       // see https://code.visualstudio.com/docs/editor/tasks#_can-a-background-task-be-used-as-a-prelaunchtask-in-launchjson
       "problemMatcher": {
-        "background": {
-          "beginsPattern": "next",
-          "endsPattern": "Ready"
-        },
         "pattern": {
-          "regexp": "^([^\\\\s].*)\\\\((\\\\d+,\\\\d+)\\\\):\\\\s*(.*)$",
+          "regexp": "^(.*):(\\d+):(\\d+)\\s+-\\s+(error|warning)\\s+(.*)$",
           "file": 1,
-          "location": 2,
-          "message": 3
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Next\\.js",
+          "endsPattern": "Ready in"
         }
       },
       "isBackground": true,
@@ -37,14 +32,13 @@
       ]
     },
     {
-      "label": "dev",
-      "dependsOn": [
-        "build:debug",
-        "ui:dev"
-      ],
-      "group": {
-        "kind": "build"
-      }
+      "label": "ui:build",
+      "type": "shell",
+      // change this to your `beforeBuildCommand`:
+      "command": "pnpm",
+      "args": [
+        "build"
+      ]
     }
   ]
 }

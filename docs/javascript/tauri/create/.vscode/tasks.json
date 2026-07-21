@@ -4,14 +4,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build:debug",
-      "type": "cargo",
-      "command": "build",
-      "options": {
-        "cwd": "${workspaceRoot}/src-tauri"
-      }
-    },
-    {
       "label": "ui:dev",
       "type": "shell",
       // `dev` keeps running in the background
@@ -20,14 +12,18 @@
       "isBackground": true,
       // change this to your `beforeDevCommand`:
       "command": "pnpm",
-      "args": ["dev"]
+      "args": [
+        "dev"
+      ]
     },
     {
-      "label": "dev",
-      "dependsOn": ["build:debug", "ui:dev"],
-      "group": {
-        "kind": "build"
-      }
+      "label": "ui:build",
+      "type": "shell",
+      // change this to your `beforeBuildCommand`:
+      "command": "pnpm",
+      "args": [
+        "build"
+      ]
     }
   ]
 }
