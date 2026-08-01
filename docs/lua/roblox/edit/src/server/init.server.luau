@@ -1,24 +1,27 @@
+--!strict
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 local Janitor = require(ReplicatedStorage.Packages.Janitor)
 local Promise = require(ReplicatedStorage.Packages.Promise)
 local Replica = require(ReplicatedStorage.Packages.Replica)
-local ProfileStore = require(script.Parent.ServerPackages.ProfileStore)
 
-local PlayerStore = ProfileStore.New("PlayerStore", {})
+type Data = {}
+
+local PlayerStore = ProfileStore.New("PlayerStore", {} :: Data)
 
 local PlayerData: {
 	[Player]: {
-		Profile: typeof(PlayerStore:StartSessionAsync()),
+		Profile: ProfileStore.Profile<Data>,
 		Replica: typeof(Replica.New()),
-		Janitor: typeof(Janitor.new()),
+		Janitor: Janitor.Janitor,
 	},
 } =
 	{}
 
 local PlayerPromises: { [Player]: typeof(Promise.try()) } = {}
 
-local function PlayerAdded(player)
+local function PlayerAdded(player: Player)
 	PlayerPromises[player] = Promise.try(function()
 		return PlayerStore:StartSessionAsync(`{player.UserId}`, {
 			Cancel = function()
@@ -26,7 +29,7 @@ local function PlayerAdded(player)
 			end,
 		})
 	end)
-		:andThen(function(profile)
+		:andThen(function(profile: ProfileStore.Profile<Data>)
 			profile:AddUserId(player.UserId)
 			profile:Reconcile()
 
@@ -45,11 +48,8 @@ local function PlayerAdded(player)
 				}
 
 				print(`Profile loaded for {player.DisplayName}!`)
-
-				return PlayerData[player]
 			else
 				profile:EndSession()
-				return
 			end
 		end)
 		:catch(function()
@@ -67,8 +67,8 @@ Replica.NewReadyPlayer:Connect(function(player: Player)
 	local playerPromise = PlayerPromises[player]
 
 	if playerPromise then
-		playerPromise:andThen(function(playerData)
-			playerData.Replica:Subscribe(player)
+		playerPromise:andThen(function()
+			PlayerData[player].Replica:Subscribe(player)
 		end)
 	end
 end)
