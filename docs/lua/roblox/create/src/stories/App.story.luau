@@ -6,10 +6,8 @@ local UILabs = require(ReplicatedStorage.DevPackages.UILabs)
 local React = require(ReplicatedStorage.Packages.React)
 local ReactRoblox = require(ReplicatedStorage.Packages.ReactRoblox)
 
-local story = UILabs.CreateReactStory({
+return UILabs.CreateReactStory({
 	react = React,
 	reactRoblox = ReactRoblox,
 	controls = {},
 }, App)
-
-return story
