@@ -1,5 +1,8 @@
 {
-  "deps": ["pino"],
+  "deps": [
+    "pino",
+    "zod"
+  ],
   "dev": [
     "typedoc",
     "prettier",

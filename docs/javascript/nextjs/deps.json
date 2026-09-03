@@ -2,9 +2,13 @@
     "deps": [
         "zustand",
         "@tanstack/react-query",
-        "zod"
+        "drizzle-orm@rc",
+        "pg",
+        "redis"
     ],
     "dev": [
+        "drizzle-kit@rc",
+        "@types/pg",
         "orval",
         "vitest",
         "@vitejs/plugin-react",

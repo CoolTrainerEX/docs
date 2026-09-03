@@ -3,7 +3,7 @@
 Docs for my personal programming paradigms.
 
 - [C++](cpp/README.md)
-- [Go](go/README.md)
+- ~~[Go](go/README.md)~~
 - [JavaScript](javascript/README.md)
 - [Kotlin](kotlin/README.md)
 - [Lua](lua/README.md)

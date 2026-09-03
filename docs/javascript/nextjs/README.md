@@ -1,6 +1,6 @@
 # NextJS
 
-NextJS is used to make frontend websites.
+NextJS is used to make frontend and full stack websites.
 
 ## Usage
 
@@ -10,6 +10,7 @@ NextJS is used to make frontend websites.
 pnpx shadcn init
 cd <name>
 pnpm create playwright
+docker init
 ```
 
 Might need to run in a subdirectory if the current directory contains

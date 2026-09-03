@@ -6,6 +6,8 @@ use clap::Subcommand;
 use crate::commands::root::RootCommands;
 
 mod cpp;
+
+#[deprecated]
 mod go;
 mod javascript;
 mod kotlin;

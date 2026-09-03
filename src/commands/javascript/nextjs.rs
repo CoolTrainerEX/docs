@@ -49,6 +49,7 @@ impl Generator for NextJS {
 
         execute_command(Command::new("pnpx").args(["shadcn", "init"]))?;
         execute_command(Command::new("pnpm").args(["create", "playwright"]))?;
+        execute_command(Command::new("docker").arg("init"))?;
         bar.inc(1);
 
         info!("Done.");

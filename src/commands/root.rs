@@ -12,7 +12,6 @@ use crate::{
     commands::{
         Commands, Generator,
         cpp::Cpp,
-        go::{Go, GoCommands},
         javascript::{JSCommands, JavaScript},
         kotlin::{KTCommands, Kotlin},
         lua::{Lua, LuaCommands},
@@ -29,7 +28,7 @@ pub enum RootCommands {
     Cpp,
 
     /// Generate Go projects.
-    Go(OptionalSubcommands<GoCommands>),
+    // Go(OptionalSubcommands<GoCommands>),
 
     /// Generate JavaScript projects.
     #[command(alias = "js")]
@@ -55,10 +54,10 @@ impl Commands for RootCommands {
     fn generator(self) -> Box<dyn Generator> {
         match self {
             RootCommands::Cpp => Box::new(Cpp),
-            RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
-                Some(c) => c.generator(),
-                None => Box::new(Go::default()),
-            },
+            // RootCommands::Go(optional_subcommands) => match optional_subcommands.command {
+            //     Some(c) => c.generator(),
+            //     None => Box::new(Go::default()),
+            // },
             RootCommands::JavaScript(optional_subcommands) => match optional_subcommands.command {
                 Some(c) => c.generator(),
                 None => Box::new(JavaScript),

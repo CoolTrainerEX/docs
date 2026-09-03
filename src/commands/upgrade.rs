@@ -6,7 +6,7 @@ use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::commands::{
-    cpp::Cpp, go::Go, javascript::JavaScript, python::Python, rust::Rust, utils::execute_command,
+    cpp::Cpp, javascript::JavaScript, python::Python, rust::Rust, utils::execute_command,
 };
 
 /// Upgraders
@@ -25,7 +25,7 @@ pub(super) trait Upgrade {
 fn upgrades() -> Vec<Box<dyn Upgrade>> {
     vec![
         Box::new(Cpp),
-        Box::new(Go::default()),
+        // Box::new(Go::default()),
         Box::new(JavaScript),
         Box::new(Python),
         Box::new(Rust),
