@@ -3,6 +3,6 @@
         "fastapi[standard]",
         "sqlmodel",
         "fastapi-redis-sdk",
-        "fastapi-users[sqlalchemy]"
+        "pyjwt"
     ]
 }

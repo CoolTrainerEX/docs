@@ -19,11 +19,18 @@ docker init
 Run this when there is a change in dependencies.
 
 ```sh
-uv export --format requirements-txt --no-dev --no-emit-project --output-file requirements.txt
+    uv export --format requirements-txt --no-dev --no-emit-project --output-file requirements.txt
 ```
+
+#### Create
+
+- [`src/<name>/database.py`](create/src/<name>/database.py)
+- [`src/<name>/models.py`](create/src/<name>/models.py)
 
 #### Edit
 
+- [`pyproject.toml`](edit/pyproject.toml)
+- [`src/<name>/__init__.py`](edit/src/<name>/__init__.py)
 - [`compose.yaml`](edit/compose.yaml)
 - `.dockerignore` (Copy `.gitignore`)
 

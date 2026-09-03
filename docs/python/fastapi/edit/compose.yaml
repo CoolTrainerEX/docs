@@ -5,13 +5,13 @@ services:
       - db-data:/var/lib/postgresql # Remove /data
   redis:
     image: redis
-    container_name: my-redis
+    container_name: <redisname>
     ports:
       - '6379:6379'
     volumes:
       - redis-data:/data
     environment:
-      - REDIS_ARGS=--requirepass your_password_here --appendonly yes
+      - REDIS_ARGS=--requirepass <password> --appendonly yes
     restart: unless-stopped
 
 volumes:
