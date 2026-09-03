@@ -2,18 +2,36 @@ use std::{env, path::Path, process::Command};
 
 use anstyle::{AnsiColor, Style};
 use anyhow::Context;
+use clap::Subcommand;
 use indicatif::ProgressBar;
 use tracing::{info, instrument};
 
 use crate::{
     DOCS_DIR,
     commands::{
-        Generator,
+        Commands, Generator,
+        python::fastapi::FastAPI,
         root::Root,
         upgrade::Upgrade,
         utils::{Deps, execute_command, extract_files},
     },
 };
+
+mod fastapi;
+
+#[derive(Subcommand)]
+pub enum PyCommands {
+    /// Generate FastAPI projects.
+    FastAPI,
+}
+
+impl Commands for PyCommands {
+    fn generator(self) -> Box<dyn Generator> {
+        match self {
+            PyCommands::FastAPI => Box::new(FastAPI),
+        }
+    }
+}
 
 /// Python generator
 #[derive(Debug)]
