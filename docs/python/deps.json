@@ -1,4 +1,9 @@
 {
+    "deps": [
+        "pydantic",
+        "pydantic-settings",
+        "structlog"
+    ],
     "dev": [
         "pytest",
         "sphinx"
