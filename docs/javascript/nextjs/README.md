@@ -35,6 +35,8 @@ so just use [manual setup](https://nextjs.org/docs/app/guides/testing/vitest).
 - [`next.config.ts`](edit/next.config.ts)
 - [`package.json`](edit/package.json)
 - [`app/layout.tsx`](edit/app/layout.tsx)
+- [`compose.yaml`](edit/compose.yaml)
+- `.dockerignore` (Copy `.gitignore`)
 
 ### Run
 

@@ -2,6 +2,8 @@
 
 Python is used for general-purpose programming.
 
+- [FastAPI](fastapi/README.md)
+
 ## Installation
 
 Install [`uv`](https://docs.astral.sh/uv/).
