@@ -2,7 +2,8 @@
     "deps": [
         "pydantic",
         "pydantic-settings",
-        "loguru"
+        "loguru",
+        "ruff"
     ],
     "dev": [
         "pytest",
