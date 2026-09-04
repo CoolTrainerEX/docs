@@ -2,7 +2,7 @@
     "deps": [
         "pydantic",
         "pydantic-settings",
-        "structlog"
+        "loguru"
     ],
     "dev": [
         "pytest",
