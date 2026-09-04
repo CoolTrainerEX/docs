@@ -19,7 +19,7 @@ docker init
 Run this when there is a change in dependencies.
 
 ```sh
-    uv export --format requirements-txt --no-dev --no-emit-project --output-file requirements.txt
+uv export --format requirements-txt --no-dev --no-emit-project --output-file requirements.txt
 ```
 
 #### Create
@@ -31,6 +31,7 @@ Run this when there is a change in dependencies.
 
 - [`pyproject.toml`](edit/pyproject.toml)
 - [`src/<name>/__init__.py`](edit/src/<name>/__init__.py)
+- [`Dockerfile`](edit/Dockerfile)
 - [`compose.yaml`](edit/compose.yaml)
 - `.dockerignore` (Copy `.gitignore`)
 
