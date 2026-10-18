@@ -3,6 +3,7 @@
 Docs for my personal programming paradigms.
 
 - [C++](cpp/README.md)
+- [Games](games/README.md)
 - ~~[Go](go/README.md)~~
 - [JavaScript](javascript/README.md)
 - [Kotlin](kotlin/README.md)

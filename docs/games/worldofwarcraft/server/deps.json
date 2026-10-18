@@ -1,0 +1,6 @@
+{
+    "deps": [
+        "https://github.com/mod-playerbots/mod-playerbots.git",
+        "https://github.com/azerothcore/mod-transmog"
+    ]
+}

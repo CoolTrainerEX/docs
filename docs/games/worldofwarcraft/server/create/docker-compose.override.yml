@@ -1,0 +1,40 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    hostname: world-of-warcraft
+    environment:
+      - TS_AUTHKEY=<tskey-YOUR-AUTH-KEY>
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      - ./tailscale-state:/var/lib/tailscale
+    cap_add:
+      - net_admin
+      - net_raw
+    restart: unless-stopped
+    networks:
+      - ac-network
+    ports:
+      - ${DOCKER_AUTH_EXTERNAL_PORT:-3724}:3724
+      - ${DOCKER_WORLD_EXTERNAL_PORT:-8085}:8085
+      - ${DOCKER_SOAP_EXTERNAL_PORT:-7878}:7878
+
+  ac-worldserver:
+    ports: !reset []
+    networks: !reset []
+    network_mode: "service:tailscale"
+    environment:
+      AC_AI_PLAYERBOT_RANDOM_BOT_AUTOLOGIN: "1"
+      AC_AI_PLAYERBOT_MIN_RANDOM_BOTS: "50"
+      AC_AI_PLAYERBOT_MAX_RANDOM_BOTS: "200"
+    volumes:
+      - ./modules:/azerothcore/modules:ro
+    depends_on:
+      - tailscale
+
+  ac-authserver:
+    ports: !reset []
+    networks: !reset []
+    network_mode: "service:tailscale"
+    depends_on:
+      - tailscale
