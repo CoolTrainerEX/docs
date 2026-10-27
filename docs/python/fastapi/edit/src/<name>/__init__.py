@@ -1,9 +1,10 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from sqlmodel import SQLModel
+from redis_fastapi import FastAPIRedis
+from sqlmodel import SQLModel, create_engine
 
-from .database import engine
+engine = create_engine("")
 
 
 @asynccontextmanager
@@ -13,3 +14,4 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+FastAPIRedis(app).lifespan()

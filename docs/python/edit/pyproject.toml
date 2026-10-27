@@ -1,5 +1,5 @@
 [tool.ruff.lint]
-select = ["D"]
+select = ["E", "W", "F", "I", "B", "C4", "UP", "ARG", "SIM"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
